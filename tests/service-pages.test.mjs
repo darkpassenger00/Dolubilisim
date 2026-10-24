@@ -14,6 +14,13 @@ test("service detail pages are generated from the editable service catalogue", (
   assert.match(route, /notFound\(\)/);
 });
 
+test("service details expose a semantic breadcrumb back to the catalogue", () => {
+  assert.match(route, /<nav aria-label="Gezinme yolu" className="breadcrumbs">/);
+  assert.match(route, /href="\/"[^>]*>Ana sayfa/);
+  assert.match(route, /href="\/#hizmetler"[^>]*>Hizmetler/);
+  assert.match(route, /aria-current="page">\{service\.title\}/);
+});
+
 test("every catalogue service is linked from the homepage and included in the sitemap", () => {
   assert.match(home, /services\.map\(/);
   assert.match(home, /href=\{`\/hizmetler\/\$\{service\.id\}`\}/);

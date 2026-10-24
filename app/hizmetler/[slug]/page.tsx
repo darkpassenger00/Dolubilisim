@@ -53,7 +53,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </header>
 
       <section className="service-detail-hero">
-        <div className="eyebrow"><span className="eyebrow-line" /> DOLU BİLİŞİM / HİZMETLER</div>
+        <nav aria-label="Gezinme yolu" className="breadcrumbs">
+          <ol>
+            <li><a href="/">Ana sayfa</a></li>
+            <li><a href="/#hizmetler">Hizmetler</a></li>
+            <li><span aria-current="page">{service.title}</span></li>
+          </ol>
+        </nav>
         <p className="service-detail-kicker">{service.audience === "individual" ? "BİREYSEL DESTEK" : service.audience === "business" ? "KURUMSAL DESTEK" : "BİREYSEL VE KURUMSAL"}</p>
         <h1>{service.title}</h1>
         <p className="service-detail-lede">{service.detail}</p>

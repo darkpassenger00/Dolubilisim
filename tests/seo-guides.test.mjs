@@ -15,6 +15,13 @@ test("SEO guides use editable structured content and search metadata", () => {
   assert.match(route, /notFound\(\)/);
 });
 
+test("guide details expose a semantic breadcrumb back to the guide list", () => {
+  assert.match(route, /<nav aria-label="Gezinme yolu" className="breadcrumbs">/);
+  assert.match(route, /href="\/"[^>]*>Ana sayfa/);
+  assert.match(route, /href="\/#rehberler"[^>]*>Rehberler/);
+  assert.match(route, /aria-current="page">\{guide\.title\}/);
+});
+
 test("the guide is linked from the homepage and included in the sitemap", () => {
   assert.match(home, /id="rehberler"/);
   assert.match(home, /\/rehber\/\$\{guide\.slug\}/);

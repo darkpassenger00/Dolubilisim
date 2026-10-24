@@ -54,7 +54,13 @@ export default async function GuidePage({ params }: GuidePageProps) {
       </header>
 
       <article className="guide-article">
-        <a className="guide-back-link" href="/#rehberler">← Rehberlere dön</a>
+        <nav aria-label="Gezinme yolu" className="breadcrumbs">
+          <ol>
+            <li><a href="/">Ana sayfa</a></li>
+            <li><a href="/#rehberler">Rehberler</a></li>
+            <li><span aria-current="page">{guide.title}</span></li>
+          </ol>
+        </nav>
         <div className="guide-article-meta"><span>{guide.category}</span><span>{guide.readingTime} dakikalık okuma</span></div>
         <h1>{guide.title}</h1>
         <p className="guide-article-lede">{guide.description}</p>
