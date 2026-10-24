@@ -1,9 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { audienceMix, services, supportPromise } from "../lib/site-content.mjs";
+import { audienceLabels, audienceMix, services, supportPromise } from "../lib/site-content.mjs";
 
 const servicePage = await readFile(new URL("../app/hizmetler/[slug]/page.tsx", import.meta.url), "utf8");
+const homepage = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
 
 test("homepage audience mix follows the agreed 55/45 balance", () => {
   assert.deepEqual(audienceMix, { individual: 55, business: 45 });
@@ -21,6 +22,12 @@ test("service catalogue covers consumer, business, cloud and security needs", ()
 test("email setup serves both audiences and social media support is explicit", () => {
   assert.equal(services.find(({ id }) => id === "email-setup").audience, "both");
   assert.equal(services.find(({ id }) => id === "social-media").audience, "business");
+});
+
+test("service cards identify their intended audience in Turkish", () => {
+  assert.deepEqual(audienceLabels, { individual: "Bireysel", business: "Kurumsal", both: "Her ikisi" });
+  assert.match(homepage, /audienceLabel\(service\.audience\)/);
+  assert.match(homepage, /className="service-audience"/);
 });
 
 test("family safety service makes consent and child controls explicit", () => {

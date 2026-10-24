@@ -1,4 +1,4 @@
-import { audienceMix, services, supportPromise } from "../lib/site-content.mjs";
+import { audienceLabels, audienceMix, services, supportPromise } from "../lib/site-content.mjs";
 import { seoGuides } from "../lib/seo-guides.mjs";
 import { faqItems } from "../lib/faq.mjs";
 import RequestForm from "./request-form";
@@ -16,6 +16,13 @@ function SparkMark() {
       <circle cx="31.5" cy="8.5" r="3" fill="currentColor" opacity=".56" />
     </svg>
   );
+}
+
+function audienceLabel(audience: string) {
+  if (audience === "individual" || audience === "business" || audience === "both") {
+    return audienceLabels[audience];
+  }
+  return audienceLabels.both;
 }
 
 export default function HomePage() {
@@ -132,7 +139,7 @@ export default function HomePage() {
           <div className="service-grid">
             {services.map((service, index) => (
               <a className="service-card" href={`/hizmetler/${service.id}`} key={service.id}>
-                <div className="service-card-top"><span className="service-number">0{index + 1}</span><span className="service-arrow"><Arrow diagonal /></span></div>
+                <div className="service-card-top"><span className="service-number">0{index + 1}</span><span className="service-audience">{audienceLabel(service.audience)}</span><span className="service-arrow"><Arrow diagonal /></span></div>
                 <h3>{service.title}</h3>
                 <p>{service.detail}</p>
               </a>
