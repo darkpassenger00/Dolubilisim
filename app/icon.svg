@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="4" y1="3" x2="44" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182643" />
+      <stop offset="1" stop-color="#10192D" />
+    </linearGradient>
+    <linearGradient id="spark" x1="9" y1="9" x2="39" y2="39" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#74E8FF" />
+      <stop offset=".55" stop-color="#6489FF" />
+      <stop offset="1" stop-color="#C77CFF" />
+    </linearGradient>
+    <filter id="glow" x="3" y="3" width="42" height="42" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="2.2" />
+    </filter>
+    <path id="mark" d="m24 6 4.2 13.8L42 24l-13.8 4.2L24 42l-4.2-13.8L6 24l13.8-4.2L24 6Z" />
+  </defs>
+  <rect x="1" y="1" width="46" height="46" rx="13" fill="url(#bg)" />
+  <rect x="1.5" y="1.5" width="45" height="45" rx="12.5" stroke="#FFFFFF" stroke-opacity=".12" />
+  <use href="#mark" fill="url(#spark)" filter="url(#glow)" opacity=".8" />
+  <use href="#mark" fill="url(#spark)" />
+  <circle cx="36" cy="11" r="2.3" fill="#A7F1FF" />
+</svg>

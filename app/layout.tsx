@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   description:
     "Bireysel teknoloji desteği ve işletmeler için web, bulut ve güvenlik danışmanlığı. İhtiyacınıza uygun çözüm için Dolu Bilişim'e ulaşın.",
   applicationName: "Dolu Bilişim",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
   openGraph: {
     title: "Dolu Bilişim | Teknoloji, güven ve dijital büyüme",
     description:
