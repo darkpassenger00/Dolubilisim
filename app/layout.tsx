@@ -11,7 +11,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
-      <body>{children}</body>
+      <body>
+        <div className="neon-entry-glow" aria-hidden="true" />
+        {children}
+      </body>
     </html>
   );
 }

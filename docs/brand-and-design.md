@@ -44,3 +44,9 @@ Bireysel ve kurumsal müşterilerin teknoloji desteği, web ve dijital hizmetler
 3. CMS ve SEO sayfa altyapısı, rehberler.
 4. Mobil/erişilebilirlik/performans doğrulaması.
 5. Alan adı alındığında yayınlama ve Search Console kurulumu.
+
+
+## Açılış efekti
+- Site ilk açıldığında ekranın dört kenarını saran ince neon ışık tek turda yaklaşık 2 saniye döner ve kaybolur.
+- Efekt dekoratif kalır; sayfa etkileşimini engellemez ve `prefers-reduced-motion` etkin olduğunda hareket göstermez.
+- Neon tonu mevcut lacivert, mavi ve mor görsel sistemiyle sınırlı tutulur; sürekli yanıp sönme kullanılmaz.
