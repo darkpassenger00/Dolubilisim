@@ -1,6 +1,7 @@
 import { audienceMix, services, supportPromise } from "../lib/site-content.mjs";
 import { seoGuides } from "../lib/seo-guides.mjs";
 import RequestForm from "./request-form";
+import SupportLinks from "./support-links";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <span aria-hidden="true" className="arrow">{diagonal ? "↗" : "→"}</span>;
@@ -161,7 +162,7 @@ export default function HomePage() {
 
       <section className="contact-banner" id="iletisim">
         <div className="contact-inner">
-          <div className="contact-copy"><div className="eyebrow"><span className="eyebrow-line" /> İlk adım basit</div><h2>Birlikte doğru<br />çözümü bulalım.</h2><p>İhtiyacınızı anlatın; size uygun destek yolunu belirleyelim.</p><div className="contact-response"><span className="response-clock">30</span><span><strong>En geç 30 dakika</strong><small>içinde ilk dönüş hedefi</small></span></div><div className="contact-hours"><span className="status-dot" /> 7/24 destek yaklaşımı</div></div>
+          <div className="contact-copy"><div className="eyebrow"><span className="eyebrow-line" /> İlk adım basit</div><h2>Birlikte doğru<br />çözümü bulalım.</h2><p>İhtiyacınızı anlatın; size uygun destek yolunu belirleyelim.</p><div className="contact-response"><span className="response-clock">30</span><span><strong>En geç 30 dakika</strong><small>içinde ilk dönüş hedefi</small></span></div><div className="contact-hours"><span className="status-dot" /> 7/24 destek yaklaşımı</div><SupportLinks /></div>
           <RequestForm />
         </div>
       </section>
