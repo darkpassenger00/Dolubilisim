@@ -1,5 +1,6 @@
 import { audienceMix, services, supportPromise } from "../lib/site-content.mjs";
 import { seoGuides } from "../lib/seo-guides.mjs";
+import { faqItems } from "../lib/faq.mjs";
 import RequestForm from "./request-form";
 import SupportLinks from "./support-links";
 
@@ -35,6 +36,7 @@ export default function HomePage() {
           <a href="#bireysel">Bireysel</a>
           <a href="#kurumsal">Kurumsal</a>
           <a href="#rehberler">Rehberler</a>
+          <a href="#sss">SSS</a>
           <a href="#yaklasim">Yaklaşımımız</a>
         </nav>
         <a className="header-cta" href="#iletisim">Bize ulaşın <Arrow diagonal /></a>
@@ -150,6 +152,21 @@ export default function HomePage() {
               <p>{guide.description}</p>
               <span className="guide-card-link">Rehberi oku <Arrow diagonal /></span>
             </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="faq-section section-shell" id="sss">
+        <div className="section-heading">
+          <div><div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> Merak edilenler</div><h2>Başlamadan önce<br /><span>bilmeniz gerekenler.</span></h2></div>
+          <p>Destek talebi, çalışma süreci ve hizmet kapsamıyla ilgili kısa yanıtlar.</p>
+        </div>
+        <div className="faq-list">
+          {faqItems.map((item, index) => (
+            <details className="faq-item" key={item.question}>
+              <summary><span className="faq-index">0{index + 1}</span><span>{item.question}</span><span className="faq-toggle" aria-hidden="true">+</span></summary>
+              <p>{item.answer}</p>
+            </details>
           ))}
         </div>
       </section>
