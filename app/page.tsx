@@ -1,4 +1,5 @@
 import { audienceMix, services, supportPromise } from "../lib/site-content.mjs";
+import RequestForm from "./request-form";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <span aria-hidden="true" className="arrow">{diagonal ? "↗" : "→"}</span>;
@@ -142,7 +143,10 @@ export default function HomePage() {
       </section>
 
       <section className="contact-banner" id="iletisim">
-        <div className="contact-inner"><div><div className="eyebrow"><span className="eyebrow-line" /> İlk adım basit</div><h2>Birlikte doğru<br />çözümü bulalım.</h2><p>İhtiyacınızı anlatın; size uygun destek yolunu belirleyelim.</p></div><span className="button button-light is-disabled" aria-disabled="true">İletişim kanalları eklenecek</span><div className="contact-note">Telefon, e-posta ve<br /><span>WhatsApp bilgileri eklenecek</span></div></div>
+        <div className="contact-inner">
+          <div className="contact-copy"><div className="eyebrow"><span className="eyebrow-line" /> İlk adım basit</div><h2>Birlikte doğru<br />çözümü bulalım.</h2><p>İhtiyacınızı anlatın; size uygun destek yolunu belirleyelim.</p><div className="contact-response"><span className="response-clock">30</span><span><strong>En geç 30 dakika</strong><small>içinde ilk dönüş hedefi</small></span></div><div className="contact-hours"><span className="status-dot" /> 7/24 destek yaklaşımı</div></div>
+          <RequestForm />
+        </div>
       </section>
 
       <footer className="site-footer"><a className="brand footer-brand" href="#top"><SparkMark /><span>DOLU<span className="brand-light">BİLİŞİM</span></span></a><span>Teknoloji, güven ve dijital büyüme.</span><span>© {new Date().getFullYear()} Dolu Bilişim</span></footer>
