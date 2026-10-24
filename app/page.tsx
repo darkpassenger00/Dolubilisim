@@ -15,8 +15,6 @@ function SparkMark() {
 }
 
 export default function HomePage() {
-  const featuredServices = services.slice(0, 6);
-
   return (
     <main>
       <div className="announcement">
@@ -125,8 +123,8 @@ export default function HomePage() {
             <a className="text-link" href="#iletisim">Tüm hizmetleri keşfet <Arrow /></a>
           </div>
           <div className="service-grid">
-            {featuredServices.map((service, index) => (
-              <a className="service-card" href="#iletisim" key={service.id}>
+            {services.map((service, index) => (
+              <a className="service-card" href={`/hizmetler/${service.id}`} key={service.id}>
                 <div className="service-card-top"><span className="service-number">0{index + 1}</span><span className="service-arrow"><Arrow diagonal /></span></div>
                 <h3>{service.title}</h3>
                 <p>{service.detail}</p>
