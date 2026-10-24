@@ -63,6 +63,16 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
+      {service.safetyNotice && (
+        <aside className="service-safety-note" aria-label="Gizlilik ve güvenlik ilkesi">
+          <span aria-hidden="true">✓</span>
+          <div>
+            <strong>Gizlilik ve güvenlik ilkesi</strong>
+            <p>{service.safetyNotice}</p>
+          </div>
+        </aside>
+      )}
+
       <section className="service-detail-content">
         <div>
           <div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> NASIL İLERLİYORUZ</div>
