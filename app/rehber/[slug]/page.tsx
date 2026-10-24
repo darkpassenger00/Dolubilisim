@@ -72,6 +72,16 @@ export default async function GuidePage({ params }: GuidePageProps) {
             </section>
           ))}
         </div>
+        {guide.sources.length > 0 && (
+          <aside className="guide-sources" aria-labelledby="guide-sources-title">
+            <h2 id="guide-sources-title">Resmî kaynaklar</h2>
+            <ul>
+              {guide.sources.map((source) => (
+                <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<span aria-hidden="true">↗</span></a></li>
+              ))}
+            </ul>
+          </aside>
+        )}
         <aside className="guide-article-cta">
           <strong>Yardım mı gerekiyor?</strong>
           <p>İhtiyacınızı formda anlatın; talep e-posta uygulamanızda taslak olarak açılır.</p>

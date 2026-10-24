@@ -8,11 +8,22 @@ const home = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8")
 const sitemap = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
 
 test("SEO guides use editable structured content and search metadata", () => {
-  assert.equal(seoGuides.length, 1);
+  assert.equal(seoGuides.length >= 2, true);
   assert.equal(seoGuides[0].sections.length >= 3, true);
   assert.match(route, /generateStaticParams/);
   assert.match(route, /generateMetadata/);
   assert.match(route, /notFound\(\)/);
+});
+
+test("site-in and off-site SEO guide is sourced and avoids ranking promises", () => {
+  const guide = seoGuides.find(({ slug }) => slug === "site-ici-site-disi-seo");
+  assert.ok(guide);
+  assert.ok(guide.sections.length >= 4);
+  assert.match(guide.sections.flatMap(({ paragraphs }) => paragraphs).join(" "), /sıralama garantisi/i);
+  assert.ok(guide.sources.length >= 2);
+  assert.ok(guide.sources.every(({ url }) => url.startsWith("https://developers.google.com/search/")));
+  assert.match(route, /guide\.sources\.map/);
+  assert.match(route, /className="guide-sources"/);
 });
 
 test("guide details expose a semantic breadcrumb back to the guide list", () => {
