@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { seoGuides } from "../../../lib/seo-guides.mjs";
+import SupportLinks from "../../support-links";
 
 const siteUrl = "https://dolubilisim.com";
 
@@ -71,6 +72,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           <a href="/#iletisim">Destek talebi oluştur <span aria-hidden="true">↗</span></a>
         </aside>
       </article>
+      <SupportLinks />
 
       <footer className="site-footer"><a className="brand footer-brand" href="/"><span className="brand-mark" aria-hidden="true">✳</span><span>DOLU<span className="brand-light">BİLİŞİM</span></span></a><span>Teknoloji, güven ve dijital büyüme.</span><a href="/#hizmetler">Hizmetler</a></footer>
     </main>
