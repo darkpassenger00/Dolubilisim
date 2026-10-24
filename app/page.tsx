@@ -3,6 +3,7 @@ import { seoGuides } from "../lib/seo-guides.mjs";
 import { faqItems } from "../lib/faq.mjs";
 import RequestForm from "./request-form";
 import SupportLinks from "./support-links";
+import MobileNav from "./mobile-nav";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <span aria-hidden="true" className="arrow">{diagonal ? "↗" : "→"}</span>;
@@ -39,6 +40,7 @@ export default function HomePage() {
           <a href="#sss">SSS</a>
           <a href="#yaklasim">Yaklaşımımız</a>
         </nav>
+        <MobileNav />
         <a className="header-cta" href="#iletisim">Bize ulaşın <Arrow diagonal /></a>
       </header>
 
