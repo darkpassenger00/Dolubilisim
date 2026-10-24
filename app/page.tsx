@@ -1,4 +1,5 @@
 import { audienceMix, services, supportPromise } from "../lib/site-content.mjs";
+import { seoGuides } from "../lib/seo-guides.mjs";
 import RequestForm from "./request-form";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -32,6 +33,7 @@ export default function HomePage() {
           <a href="#cozumler">Çözümler</a>
           <a href="#bireysel">Bireysel</a>
           <a href="#kurumsal">Kurumsal</a>
+          <a href="#rehberler">Rehberler</a>
           <a href="#yaklasim">Yaklaşımımız</a>
         </nav>
         <a className="header-cta" href="#iletisim">Bize ulaşın <Arrow diagonal /></a>
@@ -131,6 +133,23 @@ export default function HomePage() {
               </a>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="guide-section section-shell" id="rehberler">
+        <div className="section-heading">
+          <div><div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> Bilgi köşesi</div><h2>Dijital işler için<br /><span>kısa rehberler.</span></h2></div>
+          <p>Destek talebi oluşturmadan önce işinize yarayacak sade ve uygulanabilir notlar.</p>
+        </div>
+        <div className="guide-card-grid">
+          {seoGuides.map((guide) => (
+            <a className="guide-card" href={`/rehber/${guide.slug}`} key={guide.slug}>
+              <div className="guide-card-meta"><span>{guide.category}</span><span>{guide.readingTime} dk</span></div>
+              <h3>{guide.title}</h3>
+              <p>{guide.description}</p>
+              <span className="guide-card-link">Rehberi oku <Arrow diagonal /></span>
+            </a>
+          ))}
         </div>
       </section>
 
