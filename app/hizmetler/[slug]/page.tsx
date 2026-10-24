@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { services } from "../../../lib/site-content.mjs";
+import SupportLinks from "../../support-links";
 
 const siteUrl = "https://dolubilisim.com";
 
@@ -75,6 +76,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <a href="/#iletisim">Talep formuna git <span aria-hidden="true">↗</span></a>
         </aside>
       </section>
+      <SupportLinks />
 
       <footer className="site-footer"><a className="brand footer-brand" href="/"><span className="brand-mark" aria-hidden="true">✳</span><span>DOLU<span className="brand-light">BİLİŞİM</span></span></a><span>Teknoloji, güven ve dijital büyüme.</span><a href="/#hizmetler">Diğer hizmetler</a></footer>
     </main>
