@@ -11,11 +11,16 @@ test("homepage audience mix follows the agreed 55/45 balance", () => {
 
 test("service catalogue covers consumer, business, cloud and security needs", () => {
   const ids = new Set(services.map(({ id }) => id));
-  for (const id of ["computer-support", "family-safety", "web-design", "microsoft-365", "google-workspace", "security-consulting"]) {
+  for (const id of ["computer-support", "family-safety", "backup-recovery", "email-setup", "web-design", "social-media", "microsoft-365", "google-workspace", "security-consulting"]) {
     assert.ok(ids.has(id), `missing ${id}`);
   }
   assert.ok(services.some(({ audience }) => audience === "individual"));
   assert.ok(services.some(({ audience }) => audience === "business"));
+});
+
+test("email setup serves both audiences and social media support is explicit", () => {
+  assert.equal(services.find(({ id }) => id === "email-setup").audience, "both");
+  assert.equal(services.find(({ id }) => id === "social-media").audience, "business");
 });
 
 test("family safety service makes consent and child controls explicit", () => {
