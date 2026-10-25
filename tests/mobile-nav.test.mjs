@@ -19,3 +19,8 @@ test("mobile navigation exposes the main sections with an accessible toggle", ()
   assert.match(homepage, /<MobileNav/);
   assert.match(styles, /\.mobile-nav/);
 });
+
+
+test("mobile navigation toggle meets a comfortable 44px touch target", () => {
+  assert.match(styles, /@media\(max-width:760px\)[\s\S]*?\.mobile-nav-toggle\{width:44px;height:44px\}/);
+});
