@@ -31,6 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="tr">
       <body>
+        <a className="skip-link" href="#main-content">Ana içeriğe geç</a>
         <div className="neon-entry-glow" aria-hidden="true" />
         {children}
       </body>

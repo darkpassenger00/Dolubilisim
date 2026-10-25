@@ -43,7 +43,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   if (!service) notFound();
 
   return (
-    <main className="service-detail-page">
+    <main id="main-content" className="service-detail-page">
       <header className="site-header">
         <a className="brand" href="/" aria-label="Dolu Bilişim ana sayfa">
           <span className="brand-mark" aria-hidden="true">✳</span>

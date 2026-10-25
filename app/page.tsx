@@ -28,7 +28,7 @@ function audienceLabel(audience: string) {
 
 export default function HomePage() {
   return (
-    <main>
+    <main id="main-content">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(homepageStructuredData) }}

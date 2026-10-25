@@ -44,7 +44,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
   if (!guide) notFound();
 
   return (
-    <main className="guide-detail-page">
+    <main id="main-content" className="guide-detail-page">
       <header className="site-header">
         <a className="brand" href="/" aria-label="Dolu Bilişim ana sayfa">
           <span className="brand-mark" aria-hidden="true">✳</span>
