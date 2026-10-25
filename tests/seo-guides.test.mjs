@@ -6,6 +6,7 @@ import { seoGuides } from "../lib/seo-guides.mjs";
 const route = await readFile(new URL("../app/rehber/[slug]/page.tsx", import.meta.url), "utf8");
 const home = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
 const sitemap = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
 test("SEO guides use editable structured content and search metadata", () => {
   assert.equal(seoGuides.length >= 2, true);
@@ -70,4 +71,10 @@ test("the guide is linked from the homepage and included in the sitemap", () => 
   assert.match(home, /id="rehberler"/);
   assert.match(home, /\/rehber\/\$\{guide\.slug\}/);
   assert.match(sitemap, /seoGuides\.map\(\(guide\) => \(\{[\s\S]*?url: `\$\{siteUrl\}\/rehber\/\$\{guide\.slug\}`/);
+});
+
+
+test("guide cards use balanced desktop columns and a single mobile column", () => {
+  assert.match(styles, /\.guide-card-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\);gap:14px\}/);
+  assert.match(styles, /@media\(max-width:760px\)[\s\S]*?\.guide-card-grid\{grid-template-columns:1fr\}/);
 });
