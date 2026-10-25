@@ -4,6 +4,7 @@ import { faqItems } from "../lib/faq.mjs";
 import RequestForm from "./request-form";
 import SupportLinks from "./support-links";
 import MobileNav from "./mobile-nav";
+import { homepageStructuredData, serializeJsonLd } from "../lib/structured-data.mjs";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <span aria-hidden="true" className="arrow">{diagonal ? "↗" : "→"}</span>;
@@ -28,6 +29,10 @@ function audienceLabel(audience: string) {
 export default function HomePage() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(homepageStructuredData) }}
+      />
       <div className="announcement">
         <span className="status-dot" />
         <span>İhtiyacınıza uygun teknoloji desteği, tek noktada</span>
