@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...seoGuides.map((guide) => ({
       url: `${siteUrl}/rehber/${guide.slug}`,
+      lastModified: new Date(guide.updatedAt),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

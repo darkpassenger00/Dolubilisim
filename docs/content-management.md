@@ -20,7 +20,7 @@ Rehber kataloğu `lib/seo-guides.mjs` içindeki `seoGuides` dizisidir. Her kayı
 
 - `slug`: Değiştirilmemesi tercih edilen URL kimliği.
 - `title`, `description`, `category`: Sayfa başlığı, arama açıklaması ve kategori.
-- `readingTime`, `publishedAt`: Tahmini okuma süresi ve `YYYY-AA-GG` biçiminde yayın tarihi.
+- `readingTime`, `publishedAt`, `updatedAt`: Tahmini okuma süresi, yayın tarihi ve içeriğin son güncellendiği tarih (`YYYY-AA-GG`). İçeriği düzenlediğinizde `updatedAt` değerini de güncelleyin; sitemap bu tarihi arama motorlarına iletir.
 - `sections`: Başlıklar ve paragraf dizileri.
 - `sources`: Kullanılan kaynakların başlığı ve tam URL'si. Kaynak gereken rehberlerde birincil, güncel ve güvenilir sayfaları ekleyin.
 
