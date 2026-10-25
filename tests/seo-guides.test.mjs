@@ -41,6 +41,19 @@ test("Microsoft 365 setup guide covers secure rollout and cites Microsoft docume
   assert.match(content, /pilot/i);
 });
 
+test("Google Workspace setup guide covers domain, mail, account security and Drive", () => {
+  const guide = seoGuides.find(({ slug }) => slug === "google-workspace-kurulum-kontrol-listesi");
+  assert.ok(guide);
+  assert.equal(guide.publishedAt, "2026-10-25");
+  assert.ok(guide.sections.length >= 5);
+  assert.ok(guide.sources.length >= 5);
+  assert.ok(guide.sources.every(({ url }) => url.startsWith("https://support.google.com/")));
+  const content = guide.sections.flatMap(({ heading, paragraphs }) => [heading, ...paragraphs]).join(" ");
+  for (const topic of [/alan adı/, /MX kayıt/, /2 Adımlı Doğrulama/, /paylaşılan Drive/, /SPF, DKIM ve DMARC/]) {
+    assert.match(content, topic);
+  }
+});
+
 test("guide details expose a semantic breadcrumb back to the guide list", () => {
   assert.match(route, /<nav aria-label="Gezinme yolu" className="breadcrumbs">/);
   assert.match(route, /href="\/"[^>]*>Ana sayfa/);
