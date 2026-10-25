@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { services } from "../lib/site-content.mjs";
+import { getRelatedServices, services } from "../lib/site-content.mjs";
 
 const route = await readFile(new URL("../app/hizmetler/[slug]/page.tsx", import.meta.url), "utf8");
 const sitemap = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
@@ -26,4 +26,15 @@ test("every catalogue service is linked from the homepage and included in the si
   assert.match(home, /href=\{`\/hizmetler\/\$\{service\.id\}`\}/);
   assert.match(sitemap, /services\.map\(\(service\) => \(\{[\s\S]*?url: `\$\{siteUrl\}\/hizmetler\/\$\{service\.id\}`/);
   assert.ok(services.length >= 7);
+});
+
+test("related service recommendations resolve from catalogue data and render links", () => {
+  for (const service of services) {
+    const related = getRelatedServices(service.id);
+    assert.ok(related.length > 0, `${service.id} should have a related service`);
+    assert.ok(related.every((item) => item.id !== service.id));
+  }
+  assert.match(route, /getRelatedServices\(service\.id\)/);
+  assert.match(route, /className="related-service-card" href=\{`\/hizmetler\/\$\{relatedService\.id\}`\}/);
+  assert.match(route, /aria-labelledby="related-services-title"/);
 });

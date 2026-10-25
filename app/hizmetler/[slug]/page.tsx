@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { services } from "../../../lib/site-content.mjs";
+import { getRelatedServices, services } from "../../../lib/site-content.mjs";
 import SupportLinks from "../../support-links";
 
 const siteUrl = "https://dolubilisim.com";
@@ -41,6 +41,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const { slug } = await params;
   const service = findService(slug);
   if (!service) notFound();
+  const relatedServices = getRelatedServices(service.id);
 
   return (
     <main id="main-content" className="service-detail-page">
@@ -92,6 +93,23 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <a href="/#iletisim">Talep formuna git <span aria-hidden="true">↗</span></a>
         </aside>
       </section>
+      {relatedServices.length > 0 && (
+        <section className="related-services" aria-labelledby="related-services-title">
+          <div className="related-services-inner">
+            <div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> BİRLİKTE DÜŞÜNÜN</div>
+            <h2 id="related-services-title">İlgili <span>çözümler.</span></h2>
+            <div className="related-service-grid">
+              {relatedServices.map((relatedService) => (
+                <a className="related-service-card" href={`/hizmetler/${relatedService.id}`} key={relatedService.id}>
+                  <span>{relatedService.title}</span>
+                  <small>{relatedService.detail}</small>
+                  <span className="related-service-arrow" aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
       <SupportLinks />
 
       <footer className="site-footer"><a className="brand footer-brand" href="/"><span className="brand-mark" aria-hidden="true">✳</span><span>DOLU<span className="brand-light">BİLİŞİM</span></span></a><span>Teknoloji, güven ve dijital büyüme.</span><a href="/#hizmetler">Diğer hizmetler</a></footer>
