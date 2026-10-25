@@ -61,7 +61,13 @@ export default async function GuidePage({ params }: GuidePageProps) {
             <li><span aria-current="page">{guide.title}</span></li>
           </ol>
         </nav>
-        <div className="guide-article-meta"><span>{guide.category}</span><span>{guide.readingTime} dakikalık okuma</span></div>
+        <div className="guide-article-meta">
+          <span>{guide.category}</span>
+          <span>{guide.readingTime} dakikalık okuma</span>
+          <time dateTime={guide.publishedAt}>
+            {new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${guide.publishedAt}T12:00:00Z`))}
+          </time>
+        </div>
         <h1>{guide.title}</h1>
         <p className="guide-article-lede">{guide.description}</p>
         <div className="guide-article-body">

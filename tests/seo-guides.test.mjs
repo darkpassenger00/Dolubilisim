@@ -33,6 +33,11 @@ test("guide details expose a semantic breadcrumb back to the guide list", () => 
   assert.match(route, /aria-current="page">\{guide\.title\}/);
 });
 
+test("guide detail pages show the publication date as semantic time", () => {
+  assert.match(route, /<time dateTime=\{guide\.publishedAt\}>/);
+  assert.match(route, /Intl\.DateTimeFormat\("tr-TR"/);
+});
+
 test("the guide is linked from the homepage and included in the sitemap", () => {
   assert.match(home, /id="rehberler"/);
   assert.match(home, /\/rehber\/\$\{guide\.slug\}/);
