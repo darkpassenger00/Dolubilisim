@@ -38,3 +38,15 @@ test("related service recommendations resolve from catalogue data and render lin
   assert.match(route, /className="related-service-card" href=\{`\/hizmetler\/\$\{relatedService\.id\}`\}/);
   assert.match(route, /aria-labelledby="related-services-title"/);
 });
+
+test("service catalogue relations use unique, existing service IDs", () => {
+  const serviceIds = new Set(services.map(({ id }) => id));
+  for (const service of services) {
+    const relatedIds = service.relatedServiceIds || [];
+    assert.equal(new Set(relatedIds).size, relatedIds.length, `${service.id} repeats a related service`);
+    for (const relatedId of relatedIds) {
+      assert.notEqual(relatedId, service.id, `${service.id} cannot recommend itself`);
+      assert.ok(serviceIds.has(relatedId), `${service.id} references missing service ${relatedId}`);
+    }
+  }
+});
