@@ -84,3 +84,18 @@ test("guide social previews include publication and last-update timestamps", () 
   assert.match(route, /publishedTime: guide\.publishedAt/);
   assert.match(route, /modifiedTime: guide\.updatedAt/);
 });
+
+test("related guide links are valid, unique, and rendered as internal links", () => {
+  const guideSlugs = new Set(seoGuides.map(({ slug }) => slug));
+  for (const guide of seoGuides) {
+    assert.ok(Array.isArray(guide.relatedSlugs), `${guide.slug} should define related guides`);
+    assert.ok(guide.relatedSlugs.length >= 1 && guide.relatedSlugs.length <= 2);
+    assert.equal(new Set(guide.relatedSlugs).size, guide.relatedSlugs.length);
+    assert.ok(guide.relatedSlugs.every((slug) => slug !== guide.slug && guideSlugs.has(slug)));
+  }
+  assert.match(route, /guide\.relatedSlugs/);
+  assert.match(route, /relatedGuides\.map/);
+  assert.match(route, /className="related-guide-card"/);
+  assert.match(styles, /\.related-guide-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(styles, /\.related-guide-grid\{grid-template-columns:1fr\}/);
+});

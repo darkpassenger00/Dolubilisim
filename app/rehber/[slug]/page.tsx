@@ -44,6 +44,9 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const { slug } = await params;
   const guide = findGuide(slug);
   if (!guide) notFound();
+  const relatedGuides = guide.relatedSlugs
+    .map((relatedSlug) => findGuide(relatedSlug))
+    .filter((relatedGuide): relatedGuide is NonNullable<typeof relatedGuide> => relatedGuide !== undefined);
   const breadcrumbData = breadcrumbStructuredData([
     { name: "Ana sayfa", url: siteUrl },
     { name: "Rehberler", url: `${siteUrl}/#rehberler` },
@@ -103,6 +106,20 @@ export default async function GuidePage({ params }: GuidePageProps) {
               ))}
             </ul>
           </aside>
+        )}
+        {relatedGuides.length > 0 && (
+          <section className="related-guides" aria-labelledby="related-guides-title">
+            <h2 id="related-guides-title">İlgili rehberler</h2>
+            <div className="related-guide-grid">
+              {relatedGuides.map((relatedGuide) => (
+                <a className="related-guide-card" href={`/rehber/${relatedGuide.slug}`} key={relatedGuide.slug}>
+                  <span>{relatedGuide.category} · {relatedGuide.readingTime} dk</span>
+                  <strong>{relatedGuide.title}</strong>
+                  <span className="related-guide-card-link">Rehberi oku <span aria-hidden="true">↗</span></span>
+                </a>
+              ))}
+            </div>
+          </section>
         )}
         <aside className="guide-article-cta">
           <strong>Yardım mı gerekiyor?</strong>
