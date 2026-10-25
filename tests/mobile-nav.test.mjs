@@ -11,6 +11,8 @@ test("mobile navigation exposes the main sections with an accessible toggle", ()
   assert.match(component, /aria-controls="mobile-navigation"/);
   assert.match(component, /onKeyDown/);
   assert.match(component, /onClick=\{\(\) => setIsOpen\(false\)\}/);
+  assert.match(component, /addEventListener\("pointerdown"/);
+  assert.match(component, /wrapperRef\.current\?\.contains\(event\.target as Node\)/);
   for (const section of ["#cozumler", "#bireysel", "#kurumsal", "#hizmetler", "#rehberler", "#sss", "#iletisim"]) {
     assert.ok(component.includes(section), `mobile navigation is missing ${section}`);
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
 const links = [
   ["Çözümler", "#cozumler"],
@@ -15,6 +15,18 @@ const links = [
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function closeOnOutsidePointer(event: PointerEvent) {
+      if (!wrapperRef.current?.contains(event.target as Node)) setIsOpen(false);
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
+  }, [isOpen]);
 
   function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
     if (event.key === "Escape") {
@@ -24,7 +36,7 @@ export default function MobileNav() {
   }
 
   return (
-    <div className="mobile-nav">
+    <div className="mobile-nav" ref={wrapperRef}>
       <button
         ref={buttonRef}
         type="button"
