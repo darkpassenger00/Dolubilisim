@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
       locale: "tr_TR",
       type: "article",
       publishedTime: guide.publishedAt,
+      modifiedTime: guide.updatedAt,
     },
   };
 }

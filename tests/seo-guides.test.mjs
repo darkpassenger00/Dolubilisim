@@ -78,3 +78,9 @@ test("guide cards use balanced desktop columns and a single mobile column", () =
   assert.match(styles, /\.guide-card-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\);gap:14px\}/);
   assert.match(styles, /@media\(max-width:760px\)[\s\S]*?\.guide-card-grid\{grid-template-columns:1fr\}/);
 });
+
+
+test("guide social previews include publication and last-update timestamps", () => {
+  assert.match(route, /publishedTime: guide\.publishedAt/);
+  assert.match(route, /modifiedTime: guide\.updatedAt/);
+});
