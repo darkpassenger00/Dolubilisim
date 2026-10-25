@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { seoGuides } from "../lib/seo-guides.mjs";
+import { guideSectionId } from "../lib/guide-sections.mjs";
 
 const route = await readFile(new URL("../app/rehber/[slug]/page.tsx", import.meta.url), "utf8");
 const home = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
@@ -98,4 +99,17 @@ test("related guide links are valid, unique, and rendered as internal links", ()
   assert.match(route, /className="related-guide-card"/);
   assert.match(styles, /\.related-guide-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
   assert.match(styles, /\.related-guide-grid\{grid-template-columns:1fr\}/);
+});
+
+test("guide table of contents anchors every section with a stable unique Turkish slug", () => {
+  for (const guide of seoGuides) {
+    const sectionIds = guide.sections.map(({ heading }) => guideSectionId(heading));
+    assert.ok(sectionIds.every((id) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)));
+    assert.equal(new Set(sectionIds).size, sectionIds.length);
+  }
+  assert.equal(guideSectionId("Alan adını doğrulayın; e-posta DNS değişikliğini planlayın"), "alan-adini-dogrulayin-e-posta-dns-degisikligini-planlayin");
+  assert.match(route, /aria-label="Bu rehberde"/);
+  assert.match(route, /href=\{`#\$\{guideSectionId\(section\.heading\)\}`\}/);
+  assert.match(route, /id=\{guideSectionId\(section\.heading\)\}/);
+  assert.match(styles, /\.guide-toc/);
 });

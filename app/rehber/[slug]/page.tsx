@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { seoGuides } from "../../../lib/seo-guides.mjs";
+import { guideSectionId } from "../../../lib/guide-sections.mjs";
 import { articleStructuredData, breadcrumbStructuredData, serializeJsonLd } from "../../../lib/structured-data.mjs";
 import SupportLinks from "../../support-links";
 
@@ -89,9 +90,19 @@ export default async function GuidePage({ params }: GuidePageProps) {
         </div>
         <h1>{guide.title}</h1>
         <p className="guide-article-lede">{guide.description}</p>
+        {guide.sections.length >= 3 && (
+          <nav className="guide-toc" aria-label="Bu rehberde">
+            <strong>Bu rehberde</strong>
+            <ol>
+              {guide.sections.map((section) => (
+                <li key={section.heading}><a href={`#${guideSectionId(section.heading)}`}>{section.heading}</a></li>
+              ))}
+            </ol>
+          </nav>
+        )}
         <div className="guide-article-body">
           {guide.sections.map((section) => (
-            <section key={section.heading}>
+            <section key={section.heading} id={guideSectionId(section.heading)}>
               <h2>{section.heading}</h2>
               {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </section>
