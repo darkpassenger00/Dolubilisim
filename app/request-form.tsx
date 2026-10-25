@@ -1,7 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { services } from "../lib/site-content.mjs";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { getServicesForAudience } from "../lib/site-content.mjs";
 import { createEmailDraftHref } from "../lib/contact-draft.mjs";
 
 type RequestDetails = {
@@ -15,10 +15,16 @@ type RequestDetails = {
   message: string;
 };
 
-const serviceOptions = services.filter(({ audience }) => audience !== "both");
-
 export default function RequestForm() {
   const [status, setStatus] = useState("");
+  const [audience, setAudience] = useState<"Bireysel" | "Kurumsal">("Bireysel");
+  const [service, setService] = useState("");
+  const serviceOptions = getServicesForAudience(audience === "Bireysel" ? "individual" : "business");
+
+  function handleAudienceChange(event: ChangeEvent<HTMLSelectElement>) {
+    setAudience(event.currentTarget.value as "Bireysel" | "Kurumsal");
+    setService("");
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -48,10 +54,10 @@ export default function RequestForm() {
       <div className="form-intro"><span className="form-step">TALEP FORMU / 01</span><p>İhtiyacınızı kısaca anlatın. Bilgileriniz bu sitede kaydedilmez; e-posta taslağı cihazınızda açılır.</p></div>
       <div className="form-grid">
         <label>Müşteri türü
-          <select name="audience" defaultValue="Bireysel" required><option>Bireysel</option><option>Kurumsal</option></select>
+          <select name="audience" value={audience} onChange={handleAudienceChange} required><option>Bireysel</option><option>Kurumsal</option></select>
         </label>
         <label>Hizmet alanı
-          <select name="service" defaultValue="" required><option value="" disabled>Seçim yapın</option>{serviceOptions.map((service) => <option key={service.id}>{service.title}</option>)}<option>Diğer / Emin değilim</option></select>
+          <select name="service" value={service} onChange={(event) => setService(event.currentTarget.value)} required><option value="" disabled>Seçim yapın</option>{serviceOptions.map((option) => <option key={option.id}>{option.title}</option>)}<option>Diğer / Emin değilim</option></select>
         </label>
         <label>Ad soyad
           <input name="name" autoComplete="name" placeholder="Adınız ve soyadınız" required />

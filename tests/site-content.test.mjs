@@ -1,10 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { audienceLabels, audienceMix, services, supportPromise } from "../lib/site-content.mjs";
+import { audienceLabels, audienceMix, getServicesForAudience, services, supportPromise } from "../lib/site-content.mjs";
 
 const servicePage = await readFile(new URL("../app/hizmetler/[slug]/page.tsx", import.meta.url), "utf8");
 const homepage = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+const requestForm = await readFile(new URL("../app/request-form.tsx", import.meta.url), "utf8");
 
 test("homepage audience mix follows the agreed 55/45 balance", () => {
   assert.deepEqual(audienceMix, { individual: 55, business: 45 });
@@ -22,6 +23,16 @@ test("service catalogue covers consumer, business, cloud and security needs", ()
 test("email setup serves both audiences and social media support is explicit", () => {
   assert.equal(services.find(({ id }) => id === "email-setup").audience, "both");
   assert.equal(services.find(({ id }) => id === "social-media").audience, "business");
+});
+
+test("request form only offers audience-matched and shared services", () => {
+  const individual = getServicesForAudience("individual").map(({ id }) => id);
+  const business = getServicesForAudience("business").map(({ id }) => id);
+  assert.deepEqual(individual, ["computer-support", "email-setup", "family-safety", "backup-recovery", "security-consulting"]);
+  assert.deepEqual(business, ["email-setup", "web-design", "social-media", "microsoft-365", "google-workspace", "security-consulting"]);
+  assert.match(requestForm, /getServicesForAudience\(audience === "Bireysel" \? "individual" : "business"\)/);
+  assert.match(requestForm, /onChange=\{handleAudienceChange\}/);
+  assert.match(requestForm, /setService\(""\)/);
 });
 
 test("service cards identify their intended audience in Turkish", () => {
