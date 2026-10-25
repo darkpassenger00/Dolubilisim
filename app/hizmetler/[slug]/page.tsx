@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getRelatedServices, services } from "../../../lib/site-content.mjs";
+import { breadcrumbStructuredData, serializeJsonLd } from "../../../lib/structured-data.mjs";
 import SupportLinks from "../../support-links";
 
 const siteUrl = "https://dolubilisim.com";
@@ -42,9 +43,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const service = findService(slug);
   if (!service) notFound();
   const relatedServices = getRelatedServices(service.id);
+  const breadcrumbData = breadcrumbStructuredData([
+    { name: "Ana sayfa", url: siteUrl },
+    { name: "Hizmetler", url: `${siteUrl}/#hizmetler` },
+    { name: service.title, url: `${siteUrl}/hizmetler/${service.id}` },
+  ]);
 
   return (
     <main id="main-content" className="service-detail-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbData) }} />
       <header className="site-header">
         <a className="brand" href="/" aria-label="Dolu Bilişim ana sayfa">
           <span className="brand-mark" aria-hidden="true">✳</span>

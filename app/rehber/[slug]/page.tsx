@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { seoGuides } from "../../../lib/seo-guides.mjs";
+import { breadcrumbStructuredData, serializeJsonLd } from "../../../lib/structured-data.mjs";
 import SupportLinks from "../../support-links";
 
 const siteUrl = "https://dolubilisim.com";
@@ -42,9 +43,15 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const { slug } = await params;
   const guide = findGuide(slug);
   if (!guide) notFound();
+  const breadcrumbData = breadcrumbStructuredData([
+    { name: "Ana sayfa", url: siteUrl },
+    { name: "Rehberler", url: `${siteUrl}/#rehberler` },
+    { name: guide.title, url: `${siteUrl}/rehber/${guide.slug}` },
+  ]);
 
   return (
     <main id="main-content" className="guide-detail-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbData) }} />
       <header className="site-header">
         <a className="brand" href="/" aria-label="Dolu Bilişim ana sayfa">
           <span className="brand-mark" aria-hidden="true">✳</span>
