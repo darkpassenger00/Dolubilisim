@@ -35,6 +35,12 @@ test("request form only offers audience-matched and shared services", () => {
   assert.match(requestForm, /setService\(""\)/);
 });
 
+test("request form keeps email-draft messages concise and shows a live character count", () => {
+  assert.match(requestForm, /maxLength=\{1800\}/);
+  assert.match(requestForm, /setMessageLength\(event\.currentTarget\.value\.length\)/);
+  assert.match(requestForm, /aria-live="polite">\{messageLength\}\/1800 karakter/);
+});
+
 test("service cards identify their intended audience in Turkish", () => {
   assert.deepEqual(audienceLabels, { individual: "Bireysel", business: "Kurumsal", both: "Her ikisi" });
   assert.match(homepage, /audienceLabel\(service\.audience\)/);

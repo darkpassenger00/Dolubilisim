@@ -19,6 +19,7 @@ export default function RequestForm() {
   const [status, setStatus] = useState("");
   const [audience, setAudience] = useState<"Bireysel" | "Kurumsal">("Bireysel");
   const [service, setService] = useState("");
+  const [messageLength, setMessageLength] = useState(0);
   const serviceOptions = getServicesForAudience(audience === "Bireysel" ? "individual" : "business");
 
   function handleAudienceChange(event: ChangeEvent<HTMLSelectElement>) {
@@ -72,7 +73,8 @@ export default function RequestForm() {
           <select name="preferredContact" defaultValue="E-posta"><option>E-posta</option><option>Telefon</option><option>WhatsApp</option></select>
         </label>
         <label className="form-wide">Talebiniz
-          <textarea name="message" rows={4} placeholder="Nasıl yardımcı olabiliriz? Lütfen parola gibi hassas bilgileri yazmayın." required />
+          <textarea name="message" rows={4} maxLength={1800} onChange={(event) => setMessageLength(event.currentTarget.value.length)} placeholder="Nasıl yardımcı olabiliriz? Lütfen parola gibi hassas bilgileri yazmayın." required />
+          <span className="message-counter" aria-live="polite">{messageLength}/1800 karakter</span>
         </label>
         <label className="urgency-field">Öncelik
           <select name="urgency" defaultValue="Normal"><option>Normal</option><option>Acil</option></select>
