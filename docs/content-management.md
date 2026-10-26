@@ -14,6 +14,10 @@ Hizmet kataloğu `lib/site-content.mjs` içindeki `services` dizisidir. Her hizm
 
 Yeni `id` değerini değiştirmek mevcut bağlantıları etkiler. Her hizmetin en az bir geçerli ilgili hizmet kimliği olduğundan emin olun. Katalog, ana sayfa kartlarını, statik hizmet sayfalarını, metadata'yı ve site haritası adreslerini otomatik üretir.
 
+### Hizmet sayfasından destek talebine geçiş
+
+Hizmet detay sayfasındaki destek bağlantıları `/?hizmet=<hizmet-id>#iletisim` biçimini kullanır. `hizmet` değeri katalogdaki sabit `id` ile eşleştiğinde talep formu hizmeti ve uygun müşteri türünü otomatik seçer. Örneğin `/?hizmet=microsoft-365#iletisim` bağlantısı Kurumsal ve Microsoft 365 seçimini hazırlar. `both` kapsamındaki ortak hizmetler formda Bireysel seçimiyle açılır; ziyaretçi müşteri türünü değiştirebilir. Otomatik seçim sadece formu kolaylaştırır: form e-posta taslağı oluşturur, mesajı kendiliğinden göndermez.
+
 ## Rehber ekleme veya düzenleme
 
 Rehber kataloğu `lib/seo-guides.mjs` içindeki `seoGuides` dizisidir. Her kayıtta:
