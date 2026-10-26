@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { filterServicesForAudience } from "../lib/service-discovery.mjs";
+import { countServicesByCategory, filterServicesForAudience } from "../lib/service-discovery.mjs";
 
 type Service = { id: string; audience: string; category: string; title: string; detail: string };
 
@@ -22,6 +22,7 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [query, setQuery] = useState("");
   const categories = useMemo(() => [...new Set(services.map((service) => service.category))], [services]);
+  const categoryCounts: Record<string, number> = useMemo(() => countServicesByCategory(services, audience) as Record<string, number>, [services, audience]);
   const results: Service[] = useMemo(() => filterServicesForAudience(services, audience, selectedCategory, query) as Service[], [services, audience, selectedCategory, query]);
 
   return (
@@ -46,8 +47,8 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
           <div className="service-category-filters" role="group" aria-label="Hizmet kategorisi">
             <button type="button" aria-pressed={selectedCategory === "all"} onClick={() => setSelectedCategory("all")}>Tüm kategoriler</button>
             {categories.map((category) => (
-              <button type="button" key={category} aria-pressed={selectedCategory === category} onClick={() => setSelectedCategory(category)}>
-                {category}
+              <button type="button" key={category} aria-label={`${category}, ${categoryCounts[category] ?? 0} hizmet`} aria-pressed={selectedCategory === category} onClick={() => setSelectedCategory(category)}>
+                <span>{category}</span><span className="service-filter-count" aria-hidden="true">{categoryCounts[category] ?? 0}</span>
               </button>
             ))}
           </div>

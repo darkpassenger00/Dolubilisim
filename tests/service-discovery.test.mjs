@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { services } from "../lib/site-content.mjs";
-import { createServiceDiscoveryIndex, filterServicesForAudience } from "../lib/service-discovery.mjs";
+import { countServicesByCategory, createServiceDiscoveryIndex, filterServicesForAudience } from "../lib/service-discovery.mjs";
 import { readFile } from "node:fs/promises";
 
 const home = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
@@ -35,6 +35,16 @@ test("audience filter includes shared services and retains the full catalog opti
   );
 });
 
+test("category counts follow the active audience and include shared services", () => {
+  const index = createServiceDiscoveryIndex(services);
+  const individual = countServicesByCategory(index, "individual");
+  const business = countServicesByCategory(index, "business");
+  assert.equal(individual["E-posta ve bulut"], 1);
+  assert.equal(business["E-posta ve bulut"], 3);
+  assert.equal(individual["Güvenlik danışmanlığı"], 1);
+  assert.equal(business["Güvenlik danışmanlığı"], 1);
+});
+
 test("service search matches Turkish titles, details, and categories together with filters", () => {
   const index = createServiceDiscoveryIndex(services);
   assert.deepEqual(filterServicesForAudience(index, "all", "all", "microsoft").map(({ id }) => id), ["email-setup", "microsoft-365"]);
@@ -50,6 +60,7 @@ test("homepage renders accessible audience and category filters with result anno
   assert.match(component, /aria-pressed=\{audience === filter\.id\}/);
   assert.match(component, /aria-label="Hizmet kategorisi"/);
   assert.match(component, /aria-pressed=\{selectedCategory === category\}/);
+  assert.match(component, /categoryCounts\[category\]/);
   assert.match(component, /aria-live="polite"/);
   assert.match(component, /aria-label="Hizmet ara"/);
   assert.match(component, /Hizmet bulunamadı/);
