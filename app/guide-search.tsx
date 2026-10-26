@@ -9,7 +9,7 @@ type Guide = {
   description: string;
   category: string;
   readingTime: number;
-  sections: { heading: string; paragraphs: string[] }[];
+  keywords: readonly string[];
 };
 
 export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {

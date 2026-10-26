@@ -70,7 +70,7 @@ test("guide detail pages show the publication date as semantic time", () => {
 
 test("the guide is linked from the homepage and included in the sitemap", () => {
   assert.match(home, /id="rehberler"/);
-  assert.match(home, /<GuideSearch guides=\{seoGuides\}\s*\/>/);
+  assert.match(home, /<GuideSearch guides=\{guideSearchIndex\}\s*\/>/);
   assert.match(sitemap, /seoGuides\.map\(\(guide\) => \(\{[\s\S]*?url: `\$\{siteUrl\}\/rehber\/\$\{guide\.slug\}`/);
 });
 

@@ -1,5 +1,6 @@
 import { audienceLabels, audienceMix, services, supportPromise } from "../lib/site-content.mjs";
 import { seoGuides } from "../lib/seo-guides.mjs";
+import { createGuideSearchIndex } from "../lib/search-guides.mjs";
 import { faqItems } from "../lib/faq.mjs";
 import RequestForm from "./request-form";
 import SupportLinks from "./support-links";
@@ -26,6 +27,8 @@ function audienceLabel(audience: string) {
   }
   return audienceLabels.both;
 }
+
+const guideSearchIndex = createGuideSearchIndex(seoGuides);
 
 export default function HomePage() {
   return (
@@ -159,7 +162,7 @@ export default function HomePage() {
           <div><div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> Bilgi köşesi</div><h2>Dijital işler için<br /><span>kısa rehberler.</span></h2></div>
           <p>Destek talebi oluşturmadan önce işinize yarayacak sade ve uygulanabilir notlar.</p>
         </div>
-        <GuideSearch guides={seoGuides} />
+        <GuideSearch guides={guideSearchIndex} />
       </section>
 
       <section className="faq-section section-shell" id="sss">
