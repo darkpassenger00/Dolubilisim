@@ -121,3 +121,20 @@ test("guide publication and update dates are visibly labeled without implying an
   assert.match(route, /<time dateTime=\{guide\.updatedAt\}>/);
   assert.match(styles, /\.guide-date-label/);
 });
+
+test("location sharing guide prioritizes consent, child controls and official platform sources", () => {
+  const guide = seoGuides.find(({ slug }) => slug === "guvenli-konum-paylasimi-ve-ebeveyn-kontrolleri");
+  assert.ok(guide);
+  assert.equal(guide.publishedAt, "2026-10-26");
+  assert.ok(guide.sections.length >= 4);
+  assert.equal(guide.sources.length, 3);
+  assert.ok(guide.sources.some(({ url }) => url.startsWith("https://support.apple.com/")));
+  assert.ok(guide.sources.some(({ url }) => url.startsWith("https://support.google.com/maps/")));
+  assert.ok(guide.sources.some(({ url }) => url.startsWith("https://support.google.com/families/")));
+  const content = guide.sections.flatMap(({ heading, paragraphs }) => [heading, ...paragraphs]).join(" ");
+  assert.match(content, /açık onayıyla/);
+  assert.match(content, /gizlice takip/);
+  assert.match(content, /ebeveyn/);
+  assert.match(content, /paylaşımı durdur/);
+  assert.match(route, /guide\.sections\.map/);
+});
