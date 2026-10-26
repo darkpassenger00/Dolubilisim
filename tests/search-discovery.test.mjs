@@ -42,10 +42,18 @@ test("guide search finds titles, categories and article text case-insensitively"
   assert.deepEqual(filterSeoGuides(seoGuides, "eşleşmeyen ifade"), []);
 });
 
+test("guide category filters combine with the text query", () => {
+  assert.deepEqual(filterSeoGuides(seoGuides, "", "SEO rehberi").map(({ slug }) => slug), ["site-ici-site-disi-seo"]);
+  assert.deepEqual(filterSeoGuides(seoGuides, "365", "Kurumsal rehber").map(({ slug }) => slug), ["microsoft-365-kurulum-kontrol-listesi"]);
+  assert.deepEqual(filterSeoGuides(seoGuides, "bilgisayar", "SEO rehberi"), []);
+});
+
 test("homepage guide search announces results and provides an empty state", () => {
   assert.match(home, /<GuideSearch guides=\{seoGuides\}\s*\/>/);
   assert.match(searchComponent, /htmlFor="guide-search"/);
   assert.match(searchComponent, /id="guide-search"[\s\S]*?type="search"/);
   assert.match(searchComponent, /aria-live="polite"/);
+  assert.match(searchComponent, /aria-pressed=\{selectedCategory === category\}/);
+  assert.match(searchComponent, /aria-label="Rehber kategorileri"/);
   assert.match(searchComponent, /Bu aramayla eşleşen rehber bulunamadı/);
 });

@@ -14,7 +14,9 @@ type Guide = {
 
 export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
   const [query, setQuery] = useState("");
-  const results: Guide[] = useMemo(() => filterSeoGuides(guides, query), [guides, query]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const categories = useMemo(() => [...new Set(guides.map((guide) => guide.category))], [guides]);
+  const results: Guide[] = useMemo(() => filterSeoGuides(guides, query, selectedCategory), [guides, query, selectedCategory]);
 
   return (
     <div className="guide-discovery">
@@ -31,6 +33,12 @@ export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
         />
         {query && <button className="guide-search-clear" type="button" onClick={() => setQuery("")}>Temizle</button>}
       </div>
+      <nav className="guide-category-filters" aria-label="Rehber kategorileri">
+        <button type="button" aria-pressed={selectedCategory === ""} onClick={() => setSelectedCategory("")}>Tümü</button>
+        {categories.map((category) => (
+          <button type="button" key={category} aria-pressed={selectedCategory === category} onClick={() => setSelectedCategory(category)}>{category}</button>
+        ))}
+      </nav>
       <p className="guide-search-count" aria-live="polite">{results.length} rehber gösteriliyor</p>
       {results.length > 0 ? (
         <div className="guide-card-grid">
