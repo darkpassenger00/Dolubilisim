@@ -22,6 +22,8 @@ export default function RequestForm() {
   const [audience, setAudience] = useState<"Bireysel" | "Kurumsal">("Bireysel");
   const [service, setService] = useState("");
   const [messageLength, setMessageLength] = useState(0);
+  const [preferredContact, setPreferredContact] = useState("E-posta");
+  const phoneRequired = preferredContact !== "E-posta";
   const serviceOptions = getServicesForAudience(audience === "Bireysel" ? "individual" : "business");
 
   useEffect(() => {
@@ -77,11 +79,11 @@ export default function RequestForm() {
         <label>E-posta adresi
           <input name="email" type="email" autoComplete="email" placeholder="ornek@email.com" required />
         </label>
-        <label>Telefon <span className="optional-label">İsteğe bağlı</span>
-          <input name="phone" type="tel" autoComplete="tel" placeholder="05__ ___ __ __" />
+        <label>Telefon <span className="optional-label">{phoneRequired ? "Seçtiğiniz iletişim yöntemi için gerekli" : "İsteğe bağlı"}</span>
+          <input name="phone" type="tel" autoComplete="tel" placeholder="05__ ___ __ __" required={phoneRequired} />
         </label>
         <label>İletişim tercihi
-          <select name="preferredContact" defaultValue="E-posta"><option>E-posta</option><option>Telefon</option><option>WhatsApp</option></select>
+          <select name="preferredContact" value={preferredContact} onChange={(event) => setPreferredContact(event.currentTarget.value)}><option>E-posta</option><option>Telefon</option><option>WhatsApp</option></select>
         </label>
         <label className="form-wide">Talebiniz
           <textarea name="message" rows={4} maxLength={1800} onChange={(event) => setMessageLength(event.currentTarget.value.length)} placeholder="Nasıl yardımcı olabiliriz? Lütfen parola gibi hassas bilgileri yazmayın." required />
