@@ -50,3 +50,17 @@ test("service catalogue relations use unique, existing service IDs", () => {
     }
   }
 });
+
+test("each service page has service-specific scope and setup steps in the catalogue", () => {
+  for (const service of services) {
+    assert.ok(service.scope?.length >= 3, `${service.id} needs at least three concrete scope items`);
+    assert.ok(service.setupSteps?.length >= 3, `${service.id} needs at least three setup steps`);
+    assert.ok(service.scope.every((item) => typeof item === "string" && item.trim()));
+    assert.ok(service.setupSteps.every((item) => typeof item === "string" && item.trim()));
+  }
+
+  assert.match(route, /service\.scope\.map\(/);
+  assert.match(route, /service\.setupSteps\.map\(/);
+  assert.match(route, /aria-labelledby="service-scope-title"/);
+  assert.match(route, /aria-labelledby="service-setup-title"/);
+});

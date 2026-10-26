@@ -100,6 +100,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <a href="/#iletisim">Talep formuna git <span aria-hidden="true">↗</span></a>
         </aside>
       </section>
+      <section className="service-playbook" aria-label={`${service.title} hizmet kapsamı ve kurulum adımları`}>
+        <div className="service-playbook-grid">
+          <section className="service-playbook-card" aria-labelledby="service-scope-title">
+            <div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> HİZMET KAPSAMI</div>
+            <h2 id="service-scope-title">Birlikte ele alacağımız <span>konular.</span></h2>
+            <ul>{service.scope.map((item, index) => <li key={item}><span className="playbook-index">0{index + 1}</span><span>{item}</span></li>)}</ul>
+          </section>
+          <section className="service-playbook-card setup-card" aria-labelledby="service-setup-title">
+            <div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> NASIL İLERLİYOR</div>
+            <h2 id="service-setup-title">Kurulumun <span>adımları.</span></h2>
+            <ol>{service.setupSteps.map((item, index) => <li key={item}><span className="playbook-index">0{index + 1}</span><span>{item}</span></li>)}</ol>
+          </section>
+        </div>
+      </section>
       {relatedServices.length > 0 && (
         <section className="related-services" aria-labelledby="related-services-title">
           <div className="related-services-inner">
