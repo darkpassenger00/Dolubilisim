@@ -9,6 +9,8 @@ npm ci
 npm run dev
 ```
 
+Windows'ta ZIP dosyasından projeyi açma adımları için [Windows yerel önizleme kılavuzuna](docs/windows-local-preview.md) bakın. ZIP'i kullanmak için Git kurulumu gerekmez; `npm` komutları için Node.js gerekir.
+
 ## Kontroller
 
 ```bash
