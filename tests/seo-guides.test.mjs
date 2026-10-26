@@ -113,3 +113,11 @@ test("guide table of contents anchors every section with a stable unique Turkish
   assert.match(route, /id=\{guideSectionId\(section\.heading\)\}/);
   assert.match(styles, /\.guide-toc/);
 });
+
+test("guide publication and update dates are visibly labeled without implying an edit", () => {
+  assert.match(route, /className="guide-date-label">Yayınlandı<\/span>/);
+  assert.match(route, /guide\.updatedAt !== guide\.publishedAt/);
+  assert.match(route, /className="guide-date-label">Güncellendi<\/span>/);
+  assert.match(route, /<time dateTime=\{guide\.updatedAt\}>/);
+  assert.match(styles, /\.guide-date-label/);
+});

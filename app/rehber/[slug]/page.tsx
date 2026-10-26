@@ -15,6 +15,15 @@ function findGuide(slug: string) {
   return seoGuides.find((guide) => guide.slug === slug);
 }
 
+function formatGuideDate(date: string) {
+  return new Intl.DateTimeFormat("tr-TR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${date}T12:00:00Z`));
+}
+
 export function generateStaticParams() {
   return seoGuides.map((guide) => ({ slug: guide.slug }));
 }
@@ -84,9 +93,17 @@ export default async function GuidePage({ params }: GuidePageProps) {
         <div className="guide-article-meta">
           <span>{guide.category}</span>
           <span>{guide.readingTime} dakikalık okuma</span>
-          <time dateTime={guide.publishedAt}>
-            {new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${guide.publishedAt}T12:00:00Z`))}
-          </time>
+          <div className="guide-date-meta">
+            <span className="guide-date-label">Yayınlandı</span>
+            <time dateTime={guide.publishedAt}>{formatGuideDate(guide.publishedAt)}</time>
+            {guide.updatedAt !== guide.publishedAt && (
+              <>
+                <span className="guide-date-separator" aria-hidden="true">·</span>
+                <span className="guide-date-label">Güncellendi</span>
+                <time dateTime={guide.updatedAt}>{formatGuideDate(guide.updatedAt)}</time>
+              </>
+            )}
+          </div>
         </div>
         <h1>{guide.title}</h1>
         <p className="guide-article-lede">{guide.description}</p>
