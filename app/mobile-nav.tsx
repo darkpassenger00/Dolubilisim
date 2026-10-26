@@ -36,7 +36,14 @@ export default function MobileNav() {
   }
 
   return (
-    <div className="mobile-nav" ref={wrapperRef}>
+    <div
+      className="mobile-nav"
+      ref={wrapperRef}
+      onKeyDown={handleKeyDown}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsOpen(false);
+      }}
+    >
       <button
         ref={buttonRef}
         type="button"
@@ -53,7 +60,6 @@ export default function MobileNav() {
         className="mobile-nav-panel"
         aria-label="Mobil menü"
         hidden={!isOpen}
-        onKeyDown={handleKeyDown}
       >
         {links.map(([label, href]) => (
           <a href={href} key={href} onClick={() => setIsOpen(false)}>{label}<span aria-hidden="true">↗</span></a>
