@@ -4,6 +4,7 @@ import { faqItems } from "../lib/faq.mjs";
 import RequestForm from "./request-form";
 import SupportLinks from "./support-links";
 import MobileNav from "./mobile-nav";
+import GuideSearch from "./guide-search";
 import { homepageStructuredData, serializeJsonLd } from "../lib/structured-data.mjs";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -158,16 +159,7 @@ export default function HomePage() {
           <div><div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> Bilgi köşesi</div><h2>Dijital işler için<br /><span>kısa rehberler.</span></h2></div>
           <p>Destek talebi oluşturmadan önce işinize yarayacak sade ve uygulanabilir notlar.</p>
         </div>
-        <div className="guide-card-grid">
-          {seoGuides.map((guide) => (
-            <a className="guide-card" href={`/rehber/${guide.slug}`} key={guide.slug}>
-              <div className="guide-card-meta"><span>{guide.category}</span><span>{guide.readingTime} dk</span></div>
-              <h3>{guide.title}</h3>
-              <p>{guide.description}</p>
-              <span className="guide-card-link">Rehberi oku <Arrow diagonal /></span>
-            </a>
-          ))}
-        </div>
+        <GuideSearch guides={seoGuides} />
       </section>
 
       <section className="faq-section section-shell" id="sss">
