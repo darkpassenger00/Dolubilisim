@@ -5,6 +5,7 @@ import { audienceLabels, audienceMix, getServicesForAudience, services, supportP
 
 const servicePage = await readFile(new URL("../app/hizmetler/[slug]/page.tsx", import.meta.url), "utf8");
 const homepage = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+const serviceDiscovery = await readFile(new URL("../app/service-discovery.tsx", import.meta.url), "utf8");
 const requestForm = await readFile(new URL("../app/request-form.tsx", import.meta.url), "utf8");
 
 test("homepage audience mix follows the agreed 55/45 balance", () => {
@@ -43,8 +44,9 @@ test("request form keeps email-draft messages concise and shows a live character
 
 test("service cards identify their intended audience in Turkish", () => {
   assert.deepEqual(audienceLabels, { individual: "Bireysel", business: "Kurumsal", both: "Her ikisi" });
-  assert.match(homepage, /audienceLabel\(service\.audience\)/);
-  assert.match(homepage, /className="service-audience"/);
+  assert.match(homepage, /createServiceDiscoveryIndex\(services\)/);
+  assert.match(serviceDiscovery, /audienceLabel\(service\.audience\)/);
+  assert.match(serviceDiscovery, /className="service-audience"/);
 });
 
 test("family safety service makes consent and child controls explicit", () => {

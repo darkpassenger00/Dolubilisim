@@ -1,11 +1,13 @@
-import { audienceLabels, audienceMix, services, supportPromise } from "../lib/site-content.mjs";
+import { audienceMix, services, supportPromise } from "../lib/site-content.mjs";
 import { seoGuides } from "../lib/seo-guides.mjs";
 import { createGuideSearchIndex } from "../lib/search-guides.mjs";
+import { createServiceDiscoveryIndex } from "../lib/service-discovery.mjs";
 import { faqItems } from "../lib/faq.mjs";
 import RequestForm from "./request-form";
 import SupportLinks from "./support-links";
 import MobileNav from "./mobile-nav";
 import GuideSearch from "./guide-search";
+import ServiceDiscovery from "./service-discovery";
 import { homepageStructuredData, serializeJsonLd } from "../lib/structured-data.mjs";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -21,14 +23,8 @@ function SparkMark() {
   );
 }
 
-function audienceLabel(audience: string) {
-  if (audience === "individual" || audience === "business" || audience === "both") {
-    return audienceLabels[audience];
-  }
-  return audienceLabels.both;
-}
-
 const guideSearchIndex = createGuideSearchIndex(seoGuides);
+const serviceDiscoveryIndex = createServiceDiscoveryIndex(services);
 
 export default function HomePage() {
   return (
@@ -145,15 +141,7 @@ export default function HomePage() {
             <div><div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> Çözüm alanlarımız</div><h2>İhtiyacınız ne olursa<br /><span>birlikte çözelim.</span></h2></div>
             <a className="text-link" href="#iletisim">Tüm hizmetleri keşfet <Arrow /></a>
           </div>
-          <div className="service-grid">
-            {services.map((service, index) => (
-              <a className="service-card" href={`/hizmetler/${service.id}`} key={service.id}>
-                <div className="service-card-top"><span className="service-number">0{index + 1}</span><span className="service-audience">{audienceLabel(service.audience)}</span><span className="service-arrow"><Arrow diagonal /></span></div>
-                <h3>{service.title}</h3>
-                <p>{service.detail}</p>
-              </a>
-            ))}
-          </div>
+          <ServiceDiscovery services={serviceDiscoveryIndex} />
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import { getRelatedServices, services } from "../lib/site-content.mjs";
 const route = await readFile(new URL("../app/hizmetler/[slug]/page.tsx", import.meta.url), "utf8");
 const sitemap = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
 const home = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+const serviceDiscovery = await readFile(new URL("../app/service-discovery.tsx", import.meta.url), "utf8");
 
 test("service detail pages are generated from the editable service catalogue", () => {
   assert.match(route, /generateStaticParams/);
@@ -22,8 +23,9 @@ test("service details expose a semantic breadcrumb back to the catalogue", () =>
 });
 
 test("every catalogue service is linked from the homepage and included in the sitemap", () => {
-  assert.match(home, /services\.map\(/);
-  assert.match(home, /href=\{`\/hizmetler\/\$\{service\.id\}`\}/);
+  assert.match(home, /<ServiceDiscovery services=\{serviceDiscoveryIndex\}\s*\/>/);
+  assert.match(serviceDiscovery, /results\.map\(/);
+  assert.match(serviceDiscovery, /href=\{`\/hizmetler\/\$\{service\.id\}`\}/);
   assert.match(sitemap, /services\.map\(\(service\) => \(\{[\s\S]*?url: `\$\{siteUrl\}\/hizmetler\/\$\{service\.id\}`/);
   assert.ok(services.length >= 7);
 });
