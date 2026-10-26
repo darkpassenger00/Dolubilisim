@@ -239,3 +239,9 @@ a:focus-visible,button:focus-visible{outline:3px solid #83a0ff;outline-offset:4p
 .support-links-hero .support-link{border-color:#e0e6f0;color:#34435b}
 .support-links-hero .support-link:hover{background:#f5f7fc;border-color:#bdcafa}
 .support-links-hero .support-link-detail{color:#718098}
+
+.support-links-hero .support-link{min-width:0;flex:1 1 180px}
+.support-links-hero .support-link-kind{font-size:12px}
+.support-links-hero .support-link-value{font-size:14px}
+.support-links-hero .support-link-detail{font-size:12px}
+@media(max-width:760px){.support-links-hero{gap:8px}.support-links-hero .support-link{flex:1 1 140px;padding:12px}}
