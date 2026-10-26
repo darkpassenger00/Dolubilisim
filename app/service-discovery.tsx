@@ -20,12 +20,17 @@ function audienceLabel(audience: string) {
 export default function ServiceDiscovery({ services }: { services: readonly Service[] }) {
   const [audience, setAudience] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [query, setQuery] = useState("");
   const categories = useMemo(() => [...new Set(services.map((service) => service.category))], [services]);
-  const results = useMemo(() => filterServicesForAudience(services, audience, selectedCategory), [services, audience, selectedCategory]);
+  const results: Service[] = useMemo(() => filterServicesForAudience(services, audience, selectedCategory, query) as Service[], [services, audience, selectedCategory, query]);
 
   return (
     <>
       <div className="service-discovery-controls">
+        <label className="service-search-field">
+          <span className="service-filter-title">Hizmetlerde ara</span>
+          <input aria-label="Hizmet ara" type="search" placeholder="Örn. Microsoft 365, yedekleme…" value={query} onChange={(event) => setQuery(event.target.value)} />
+        </label>
         <div className="service-filter-group">
           <span className="service-filter-title">Hizmet türü</span>
           <div className="service-audience-filters" role="group" aria-label="Hizmet türü">
@@ -59,6 +64,13 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
           </a>
         ))}
       </div>
+      {results.length === 0 && (
+        <div className="service-empty-state" role="status">
+          <strong>Hizmet bulunamadı</strong>
+          <p>Aramanı veya seçili filtreleri değiştirip yeniden deneyebilirsin.</p>
+          <button type="button" onClick={() => { setQuery(""); setAudience("all"); setSelectedCategory("all"); }}>Aramayı ve filtreleri temizle</button>
+        </div>
+      )}
     </>
   );
 }

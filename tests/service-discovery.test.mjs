@@ -35,6 +35,14 @@ test("audience filter includes shared services and retains the full catalog opti
   );
 });
 
+test("service search matches Turkish titles, details, and categories together with filters", () => {
+  const index = createServiceDiscoveryIndex(services);
+  assert.deepEqual(filterServicesForAudience(index, "all", "all", "microsoft").map(({ id }) => id), ["email-setup", "microsoft-365"]);
+  assert.deepEqual(filterServicesForAudience(index, "all", "all", "GUVENLİK").map(({ id }) => id), ["security-consulting"]);
+  assert.deepEqual(filterServicesForAudience(index, "business", "E-posta ve bulut", "Google Workspace").map(({ id }) => id), ["google-workspace"]);
+  assert.deepEqual(filterServicesForAudience(index, "all", "all", "bulunmayan").map(({ id }) => id), []);
+});
+
 test("homepage renders accessible audience and category filters with result announcements", () => {
   assert.match(home, /const serviceDiscoveryIndex = createServiceDiscoveryIndex\(services\)/);
   assert.match(home, /<ServiceDiscovery services=\{serviceDiscoveryIndex\}\s*\/>/);
@@ -43,5 +51,7 @@ test("homepage renders accessible audience and category filters with result anno
   assert.match(component, /aria-label="Hizmet kategorisi"/);
   assert.match(component, /aria-pressed=\{selectedCategory === category\}/);
   assert.match(component, /aria-live="polite"/);
+  assert.match(component, /aria-label="Hizmet ara"/);
+  assert.match(component, /Hizmet bulunamadı/);
   assert.ok(services.some(({ category }) => category === "Kişisel teknoloji"));
 });
