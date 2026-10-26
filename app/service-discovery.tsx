@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { filterServicesForAudience } from "../lib/service-discovery.mjs";
 
-type Service = { id: string; audience: string; title: string; detail: string };
+type Service = { id: string; audience: string; category: string; title: string; detail: string };
 
 const filters = [
   { id: "all", label: "Tüm hizmetler" },
@@ -19,17 +19,33 @@ function audienceLabel(audience: string) {
 
 export default function ServiceDiscovery({ services }: { services: readonly Service[] }) {
   const [audience, setAudience] = useState("all");
-  const results = useMemo(() => filterServicesForAudience(services, audience), [services, audience]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const categories = useMemo(() => [...new Set(services.map((service) => service.category))], [services]);
+  const results = useMemo(() => filterServicesForAudience(services, audience, selectedCategory), [services, audience, selectedCategory]);
 
   return (
     <>
       <div className="service-discovery-controls">
-        <div className="service-audience-filters" role="group" aria-label="Hizmet türü">
-          {filters.map((filter) => (
-            <button type="button" key={filter.id} aria-pressed={audience === filter.id} onClick={() => setAudience(filter.id)}>
-              {filter.label}
-            </button>
-          ))}
+        <div className="service-filter-group">
+          <span className="service-filter-title">Hizmet türü</span>
+          <div className="service-audience-filters" role="group" aria-label="Hizmet türü">
+            {filters.map((filter) => (
+              <button type="button" key={filter.id} aria-pressed={audience === filter.id} onClick={() => setAudience(filter.id)}>
+                {filter.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="service-filter-group">
+          <span className="service-filter-title">Kategori</span>
+          <div className="service-category-filters" role="group" aria-label="Hizmet kategorisi">
+            <button type="button" aria-pressed={selectedCategory === "all"} onClick={() => setSelectedCategory("all")}>Tüm kategoriler</button>
+            {categories.map((category) => (
+              <button type="button" key={category} aria-pressed={selectedCategory === category} onClick={() => setSelectedCategory(category)}>
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
         <p className="service-result-count" aria-live="polite">{results.length} hizmet gösteriliyor</p>
       </div>
@@ -37,6 +53,7 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
         {results.map((service, index) => (
           <a className="service-card" href={`/hizmetler/${service.id}`} key={service.id}>
             <div className="service-card-top"><span className="service-number">{String(index + 1).padStart(2, "0")}</span><span className="service-audience">{audienceLabel(service.audience)}</span><span className="service-arrow"><span aria-hidden="true" className="arrow">↗</span></span></div>
+            <span className="service-category-tag">{service.category}</span>
             <h3>{service.title}</h3>
             <p>{service.detail}</p>
           </a>

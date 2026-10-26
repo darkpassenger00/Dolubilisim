@@ -53,7 +53,7 @@ export default function HomePage() {
           <a href="#yaklasim">Yaklaşımımız</a>
         </nav>
         <MobileNav />
-        <a className="header-cta" href="#iletisim">Bize ulaşın <Arrow diagonal /></a>
+        <a className="header-cta" href="#iletisim">Destek talebi aç <Arrow diagonal /></a>
       </header>
 
       <section className="hero" id="top">
@@ -63,7 +63,7 @@ export default function HomePage() {
           <p className="hero-lede">Günlük dijital ihtiyaçlarınızdan işletmenizin dönüşümüne kadar, doğru çözüm için yanınızdayız.</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#cozumler">Çözümleri keşfet <Arrow /></a>
-            <a className="text-link" href="#iletisim">Nasıl çalışıyoruz? <Arrow /></a>
+            <a className="text-link" href="#iletisim">Destek talebi oluştur <Arrow /></a>
           </div>
           <div className="hero-proof">
             <div className="proof-icon"><span>24</span><span>/7</span></div>

@@ -30,6 +30,11 @@ test("every catalogue service is linked from the homepage and included in the si
   assert.ok(services.length >= 7);
 });
 
+test("homepage provides a direct support request action", () => {
+  assert.match(home, /className="header-cta" href="#iletisim">Destek talebi aç/);
+  assert.match(home, /href="#iletisim">Destek talebi oluştur/);
+});
+
 test("related service recommendations resolve from catalogue data and render links", () => {
   for (const service of services) {
     const related = getRelatedServices(service.id);

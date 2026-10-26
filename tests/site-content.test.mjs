@@ -7,6 +7,7 @@ const servicePage = await readFile(new URL("../app/hizmetler/[slug]/page.tsx", i
 const homepage = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
 const serviceDiscovery = await readFile(new URL("../app/service-discovery.tsx", import.meta.url), "utf8");
 const requestForm = await readFile(new URL("../app/request-form.tsx", import.meta.url), "utf8");
+const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
 test("homepage audience mix follows the agreed 55/45 balance", () => {
   assert.deepEqual(audienceMix, { individual: 55, business: 45 });
@@ -19,6 +20,13 @@ test("service catalogue covers consumer, business, cloud and security needs", ()
   }
   assert.ok(services.some(({ audience }) => audience === "individual"));
   assert.ok(services.some(({ audience }) => audience === "business"));
+});
+
+test("homepage reading text uses more comfortable type sizes", () => {
+  assert.match(styles, /\.service-card p\{font-size:12px/);
+  assert.match(styles, /\.audience-card p\{[^}]*font-size:12px/);
+  assert.match(styles, /\.faq-item>p\{[^}]*font-size:14px/);
+  assert.match(styles, /\.form-grid label\{[^}]*font-size:11px/);
 });
 
 test("email setup serves both audiences and social media support is explicit", () => {
