@@ -53,6 +53,11 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
             ))}
           </div>
         </div>
+        {results.length > 0 && (query || audience !== "all" || selectedCategory !== "all") && (
+          <div className="service-category-filters">
+            <button type="button" onClick={() => { setQuery(""); setAudience("all"); setSelectedCategory("all"); }}>Aramayı ve filtreleri temizle</button>
+          </div>
+        )}
         <p className="service-result-count" aria-live="polite">{results.length} hizmet gösteriliyor</p>
       </div>
       <div className="service-grid">
