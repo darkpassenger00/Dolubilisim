@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { filterSeoGuides } from "../lib/search-guides.mjs";
 
 type Guide = {
@@ -13,6 +13,7 @@ type Guide = {
 };
 
 export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
+  const searchRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const categories = useMemo(() => [...new Set(guides.map((guide) => guide.category))], [guides]);
@@ -23,6 +24,7 @@ export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
       <div className="guide-search-row">
         <label className="guide-search-label" htmlFor="guide-search">Rehberlerde ara</label>
         <input
+          ref={searchRef}
           id="guide-search"
           className="guide-search-input"
           type="search"
@@ -31,7 +33,7 @@ export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
           placeholder="Ör. Microsoft 365, yedekleme…"
           autoComplete="off"
         />
-        {query && <button className="guide-search-clear" type="button" onClick={() => setQuery("")}>Temizle</button>}
+        {query && <button className="guide-search-clear" type="button" onClick={() => { setQuery(""); searchRef.current?.focus(); }}>Aramayı temizle</button>}
       </div>
       <nav className="guide-category-filters" aria-label="Rehber kategorileri">
         <button type="button" aria-pressed={selectedCategory === ""} onClick={() => setSelectedCategory("")}>Tümü</button>
