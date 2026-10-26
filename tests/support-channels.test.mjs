@@ -8,7 +8,7 @@ const exampleEnv = await readFile(new URL("../.env.example", import.meta.url), "
 
 test("support links stay hidden until the owner configures verified contact numbers", () => {
   assert.deepEqual(getSupportChannels({}), []);
-  assert.match(home, /<SupportLinks\s*\//);
+  assert.match(home, /<SupportLinks variant="hero"\s*\/>/);
   assert.match(exampleEnv, /NEXT_PUBLIC_SUPPORT_PHONE=/);
   assert.match(exampleEnv, /NEXT_PUBLIC_WHATSAPP_NUMBER=/);
 });

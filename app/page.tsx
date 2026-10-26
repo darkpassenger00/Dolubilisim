@@ -66,6 +66,7 @@ export default function HomePage() {
             <a className="text-link" href="#hizmetler">Hizmetleri keşfet <Arrow /></a>
           </div>
           <p className="hero-request-note">Talebiniz e-posta taslağı olarak açılır; göndermeyi siz onaylarsınız.</p>
+          <SupportLinks variant="hero" />
           <div className="hero-proof">
             <div className="proof-icon"><span>24</span><span>/7</span></div>
             <div><strong>7/24 destek</strong><span>tüm hizmet alanlarında</span></div>
@@ -193,7 +194,7 @@ export default function HomePage() {
 
       <section className="contact-banner" id="iletisim">
         <div className="contact-inner">
-          <div className="contact-copy"><div className="eyebrow"><span className="eyebrow-line" /> İlk adım basit</div><h2>Birlikte doğru<br />çözümü bulalım.</h2><p>İhtiyacınızı anlatın; size uygun destek yolunu belirleyelim.</p><div className="contact-response"><span className="response-clock">30</span><span><strong>En geç 30 dakika</strong><small>içinde ilk dönüş hedefi</small></span></div><div className="contact-hours"><span className="status-dot" /> 7/24 destek yaklaşımı</div><SupportLinks /></div>
+          <div className="contact-copy"><div className="eyebrow"><span className="eyebrow-line" /> İlk adım basit</div><h2>Birlikte doğru<br />çözümü bulalım.</h2><p>İhtiyacınızı anlatın; size uygun destek yolunu belirleyelim.</p><div className="contact-response"><span className="response-clock">30</span><span><strong>En geç 30 dakika</strong><small>içinde ilk dönüş hedefi</small></span></div><div className="contact-hours"><span className="status-dot" /> 7/24 destek yaklaşımı</div></div>
           <RequestForm />
         </div>
       </section>

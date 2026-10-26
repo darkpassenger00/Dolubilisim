@@ -1,6 +1,6 @@
 import { getSupportChannels } from "../lib/support-channels.mjs";
 
-export default function SupportLinks() {
+export default function SupportLinks({ variant = "contact" }: { variant?: "hero" | "contact" }) {
   const channels = getSupportChannels({
     phone: process.env.NEXT_PUBLIC_SUPPORT_PHONE,
     whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
@@ -9,7 +9,7 @@ export default function SupportLinks() {
   if (channels.length === 0) return null;
 
   return (
-    <nav className="support-links" aria-label="Doğrudan destek kanalları">
+    <nav className={`support-links${variant === "hero" ? " support-links-hero" : ""}`} aria-label="Doğrudan destek kanalları">
       {channels.map((channel) => (
         <a
           className="support-link"
