@@ -57,7 +57,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <span className="brand-mark" aria-hidden="true">✳</span>
           <span>DOLU<span className="brand-light">BİLİŞİM</span></span>
         </a>
-        <a className="header-cta" href="/#iletisim">Talep oluştur <span className="arrow" aria-hidden="true">↗</span></a>
+        <a className="header-cta" href={`/?hizmet=${service.id}#iletisim`}>Destek talebi aç <span className="arrow" aria-hidden="true">↗</span></a>
       </header>
 
       <section className="service-detail-hero">
@@ -72,7 +72,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <h1>{service.title}</h1>
         <p className="service-detail-lede">{service.detail}</p>
         <div className="service-detail-actions">
-          <a className="button button-primary" href="/#iletisim">İhtiyacımı anlat <span className="arrow" aria-hidden="true">→</span></a>
+          <a className="button button-primary" href={`/?hizmet=${service.id}#iletisim`}>İhtiyacımı anlat <span className="arrow" aria-hidden="true">→</span></a>
           <a className="text-link" href="/">Tüm çözümlere dön <span className="arrow" aria-hidden="true">↗</span></a>
         </div>
       </section>
@@ -97,7 +97,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <span className="service-detail-number">7/24</span>
           <strong>İhtiyaç duyduğunuzda ulaşılabilir destek</strong>
           <p>İlk dönüş hedefimiz en geç 30 dakikadır. Size uygun çözüm için talep formundan bize yazın.</p>
-          <a href="/#iletisim">Talep formuna git <span aria-hidden="true">↗</span></a>
+          <a href={`/?hizmet=${service.id}#iletisim`}>Talep formuna git <span aria-hidden="true">↗</span></a>
         </aside>
       </section>
       <section className="service-playbook" aria-label={`${service.title} hizmet kapsamı ve kurulum adımları`}>

@@ -1,8 +1,9 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
-import { getServicesForAudience } from "../lib/site-content.mjs";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { getServicesForAudience, services } from "../lib/site-content.mjs";
 import { createEmailDraftHref } from "../lib/contact-draft.mjs";
+import { getServiceRequestPrefill } from "../lib/request-prefill.mjs";
 
 type RequestDetails = {
   audience: string;
@@ -22,6 +23,14 @@ export default function RequestForm() {
   const [service, setService] = useState("");
   const [messageLength, setMessageLength] = useState(0);
   const serviceOptions = getServicesForAudience(audience === "Bireysel" ? "individual" : "business");
+
+  useEffect(() => {
+    const prefill = getServiceRequestPrefill(new URLSearchParams(window.location.search).get("hizmet"), services);
+    if (prefill) {
+      setAudience(prefill.audience as "Bireysel" | "Kurumsal");
+      setService(prefill.service);
+    }
+  }, []);
 
   function handleAudienceChange(event: ChangeEvent<HTMLSelectElement>) {
     setAudience(event.currentTarget.value as "Bireysel" | "Kurumsal");
