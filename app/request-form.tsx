@@ -63,8 +63,14 @@ export default function RequestForm() {
     );
   }
 
+  function invalidateDraft() {
+    if (!draftHref) return;
+    setDraftHref("");
+    setStatus("Bilgileriniz değişti. Güncel bilgilerle e-posta taslağını yeniden oluşturun.");
+  }
+
   return (
-    <form className="request-form" onSubmit={handleSubmit}>
+    <form className="request-form" onSubmit={handleSubmit} onChange={invalidateDraft}>
       <div className="form-intro"><span className="form-step">TALEP FORMU / 01</span><p>İhtiyacınızı kısaca anlatın. Bilgileriniz bu sitede kaydedilmez; e-posta taslağı cihazınızda açılır.</p></div>
       <div className="form-grid">
         <label>Müşteri türü
