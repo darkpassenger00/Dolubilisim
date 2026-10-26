@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { countServicesByCategory, filterServicesForAudience } from "../lib/service-discovery.mjs";
 
 type Service = { id: string; audience: string; category: string; title: string; detail: string };
@@ -18,6 +18,7 @@ function audienceLabel(audience: string) {
 }
 
 export default function ServiceDiscovery({ services }: { services: readonly Service[] }) {
+  const searchRef = useRef<HTMLInputElement>(null);
   const [audience, setAudience] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [query, setQuery] = useState("");
@@ -30,7 +31,7 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
       <div className="service-discovery-controls">
         <label className="service-search-field">
           <span className="service-filter-title">Hizmetlerde ara</span>
-          <input aria-label="Hizmet ara" type="search" placeholder="Örn. Microsoft 365, yedekleme…" value={query} onChange={(event) => setQuery(event.target.value)} />
+          <input ref={searchRef} aria-label="Hizmet ara" type="search" placeholder="Örn. Microsoft 365, yedekleme…" value={query} onChange={(event) => setQuery(event.target.value)} />
         </label>
         <div className="service-filter-group">
           <span className="service-filter-title">Hizmet türü</span>
@@ -55,7 +56,7 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
         </div>
         {results.length > 0 && (query || audience !== "all" || selectedCategory !== "all") && (
           <div className="service-category-filters">
-            <button type="button" onClick={() => { setQuery(""); setAudience("all"); setSelectedCategory("all"); }}>Aramayı ve filtreleri temizle</button>
+            <button type="button" onClick={() => { setQuery(""); setAudience("all"); setSelectedCategory("all"); searchRef.current?.focus(); }}>Aramayı ve filtreleri temizle</button>
           </div>
         )}
         <p className="service-result-count" aria-live="polite">{results.length} hizmet gösteriliyor</p>
@@ -74,7 +75,7 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
         <div className="service-empty-state" role="status">
           <strong>Hizmet bulunamadı</strong>
           <p>Aramanı veya seçili filtreleri değiştirip yeniden deneyebilirsin.</p>
-          <button type="button" onClick={() => { setQuery(""); setAudience("all"); setSelectedCategory("all"); }}>Aramayı ve filtreleri temizle</button>
+          <button type="button" onClick={() => { setQuery(""); setAudience("all"); setSelectedCategory("all"); searchRef.current?.focus(); }}>Aramayı ve filtreleri temizle</button>
         </div>
       )}
     </>
