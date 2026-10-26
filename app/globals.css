@@ -77,3 +77,13 @@ a:focus-visible,button:focus-visible{outline:3px solid #83a0ff;outline-offset:4p
 @media(max-width:760px){.service-discovery-controls{display:flex;align-items:stretch;gap:12px}.service-filter-group{display:block}.service-filter-title{display:block;margin-bottom:7px}.service-audience-filters,.service-category-filters{flex-wrap:nowrap;width:100%;padding:2px 1px 8px;scrollbar-width:thin}.service-card{min-height:190px}.service-card h3{font-size:16px}.service-card p{font-size:12px}.audience-card p{font-size:13px}.section-heading>p{font-size:13px}.hero-lede{font-size:15px}.approach-copy>p,.contact-banner p,.guide-card>p{font-size:13px}.faq-item summary{font-size:14px}.faq-item>p{font-size:13px}.form-grid label{font-size:11px}.form-grid input,.form-grid select,.form-grid textarea{font-size:12px}.form-privacy{font-size:10px!important}.header-cta{font-size:11px}.guide-search-input{font-size:14px}}
 .service-search-field{grid-column:1/-1;display:grid;grid-template-columns:124px minmax(0,420px);align-items:center;gap:12px}.service-search-field input{width:100%;min-height:46px;padding:0 14px;border:1px solid #dfe5ef;border-radius:7px;background:#fff;color:var(--ink);font:inherit;font-size:14px}.service-search-field input::placeholder{color:#8995a8}.service-search-field input:focus-visible{outline:3px solid #5476ed55;outline-offset:2px;border-color:#5476ed}.service-empty-state{margin:12px 0;padding:24px;border:1px dashed #d3dbea;border-radius:10px;background:#fff;color:#52627b}.service-empty-state strong{font-size:16px}.service-empty-state p{font-size:14px}.service-empty-state button{min-height:44px;padding:0 14px;border:0;border-radius:6px;background:var(--blue);color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.service-empty-state button:focus-visible{outline:3px solid #5476ed55;outline-offset:3px}@media(max-width:760px){.service-search-field{display:block}.service-search-field input{font-size:16px}.service-empty-state{padding:20px}.service-empty-state p{font-size:13px}}
 .service-category-filters button{display:inline-flex;align-items:center;gap:8px}.service-filter-count{min-width:20px;height:20px;padding:0 6px;display:grid;place-items:center;border-radius:999px;background:#eef2f8;color:#58677e;font-size:11px;line-height:1}.service-category-filters button[aria-pressed="true"] .service-filter-count{background:#ffffff33;color:#fff}
+
+@media(max-width:760px){
+  .service-card p{font-size:14px;line-height:1.65}
+  .service-result-count,.service-category-tag{font-size:13px}
+  .form-intro p{font-size:13px}
+  .form-grid label{font-size:13px}
+  .form-grid input,.form-grid select,.form-grid textarea{font-size:16px}
+  .form-privacy{font-size:12px!important;line-height:1.65}
+  .form-submit{font-size:13px}
+}
