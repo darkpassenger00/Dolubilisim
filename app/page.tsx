@@ -35,8 +35,8 @@ export default function HomePage() {
       />
       <div className="announcement">
         <span className="status-dot" />
-        <span>İhtiyacınıza uygun teknoloji desteği, tek noktada</span>
-        <a href="#cozumler">Çözümleri keşfet <Arrow /></a>
+        <span>Bireysel ve kurumsal hizmetlerde 7/24 destek</span>
+        <a href="#iletisim">Hızlı destek talebi aç <Arrow /></a>
       </div>
 
       <header className="site-header">
@@ -53,21 +53,22 @@ export default function HomePage() {
           <a href="#yaklasim">Yaklaşımımız</a>
         </nav>
         <MobileNav />
-        <a className="header-cta" href="#iletisim">Destek talebi aç <Arrow diagonal /></a>
+        <a className="header-cta" href="#iletisim">Hızlı destek al <Arrow diagonal /></a>
       </header>
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-line" /> Teknoloji desteği, insan gibi</div>
-          <h1>Teknoloji<br />işinizi <span>kolaylaştırsın.</span></h1>
-          <p className="hero-lede">Günlük dijital ihtiyaçlarınızdan işletmenizin dönüşümüne kadar, doğru çözüm için yanınızdayız.</p>
+          <div className="eyebrow"><span className="eyebrow-line" /> Bireysel ve kurumsal destek · 7/24</div>
+          <h1>Teknoloji desteği<br /><span>hep yanınızda.</span></h1>
+          <p className="hero-lede">Bilgisayar ve e-posta kurulumundan Microsoft 365, Google Workspace, web, sosyal medya ve güvenlik danışmanlığına kadar ihtiyacınız olan çözüm için yanınızdayız.</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#cozumler">Çözümleri keşfet <Arrow /></a>
-            <a className="text-link" href="#iletisim">Destek talebi oluştur <Arrow /></a>
+            <a className="button button-primary" href="#iletisim">Hızlı destek talebi aç <Arrow /></a>
+            <a className="text-link" href="#hizmetler">Hizmetleri keşfet <Arrow /></a>
           </div>
+          <p className="hero-request-note">Talebiniz e-posta taslağı olarak açılır; göndermeyi siz onaylarsınız.</p>
           <div className="hero-proof">
             <div className="proof-icon"><span>24</span><span>/7</span></div>
-            <div><strong>İhtiyacınız olduğunda</strong><span>ulaşılabilir destek</span></div>
+            <div><strong>7/24 destek</strong><span>tüm hizmet alanlarında</span></div>
             <span className="proof-divider" />
             <div className="proof-icon response-icon">30<span>dk</span></div>
             <div><strong>En geç 30 dakika</strong><span>içinde ilk dönüş</span></div>
@@ -80,18 +81,18 @@ export default function HomePage() {
           <div className="hero-glow" />
           <div className="hero-card hero-card-main">
             <div className="card-topline"><span className="mini-brand"><SparkMark /> DOLU BİLİŞİM</span><span className="card-menu">···</span></div>
-            <div className="card-welcome">Bugün neye ihtiyacınız var?</div>
-            <div className="solution-row">
+            <div className="card-welcome">Hangi konuda destek arıyorsunuz?</div>
+            <a className="solution-row" href="#bireysel">
               <div className="solution-icon personal-icon"><span>⌂</span></div>
-              <div><strong>Kendiniz için</strong><span>Günlük teknoloji desteği</span></div>
+              <div><strong>Kişisel teknoloji</strong><span>Bilgisayar · e-posta · yedekleme</span></div>
               <Arrow />
-            </div>
-            <div className="solution-row">
+            </a>
+            <a className="solution-row" href="#hizmetler">
               <div className="solution-icon business-icon"><span>▦</span></div>
-              <div><strong>İşletmeniz için</strong><span>Bulut, web ve güvenlik</span></div>
+              <div><strong>Kurumsal hizmetler</strong><span>Microsoft 365 · web · güvenlik</span></div>
               <Arrow />
-            </div>
-            <div className="card-foot"><span className="status-dot" /> Sizin için doğru çözümü birlikte bulalım</div>
+            </a>
+            <div className="card-foot"><span className="status-dot" /> Hızlı destek talebi oluşturun</div>
           </div>
           <div className="floating-note note-cloud"><span className="note-icon">✳</span><span><strong>Bulut çözümleri</strong><small>Microsoft 365 · Workspace</small></span></div>
           <div className="floating-note note-secure"><span className="secure-check">✓</span><span><strong>Güvenli yaklaşım</strong><small>İhtiyacınıza özel danışmanlık</small></span></div>
@@ -102,14 +103,30 @@ export default function HomePage() {
       </section>
 
       <div className="trust-strip" aria-label="Destek özellikleri">
-        <span>İlk dönüş en geç <strong>{supportPromise.firstResponseMinutes} dakika</strong></span>
+        <span><strong>{supportPromise.availability}</strong> tüm hizmetlerde destek</span>
         <span className="strip-separator">✳</span>
-        <span><strong>{supportPromise.availability}</strong> ulaşılabilirlik</span>
+        <span>En geç <strong>{supportPromise.firstResponseMinutes} dakika</strong> içinde ilk dönüş</span>
+        <span className="strip-separator">✳</span>
+        <span>Talep formu <strong>e-posta taslağı</strong> açar</span>
         <span className="strip-separator">✳</span>
         <span>Bireysel ve <strong>kurumsal</strong> çözümler</span>
-        <span className="strip-separator">✳</span>
-        <span>Önce <strong>ihtiyacınızı</strong> anlarız</span>
       </div>
+
+      <section className="service-shortcuts section-shell" aria-labelledby="service-shortcuts-title">
+        <div className="service-shortcuts-heading">
+          <div>
+            <div className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> Hizmetlerimiz</div>
+            <h2 id="service-shortcuts-title">Hızlı erişim</h2>
+          </div>
+          <a className="text-link" href="#hizmetler">Tüm hizmetleri gör <Arrow /></a>
+        </div>
+        <nav className="service-shortcut-grid" aria-label="Hizmet alanlarına hızlı erişim">
+          <a className="service-shortcut" href="#bireysel"><span className="service-shortcut-index">01</span><span className="service-shortcut-copy"><strong>Kişisel teknoloji</strong><small>Bilgisayar · e-posta · yedekleme</small></span><Arrow diagonal /></a>
+          <a className="service-shortcut" href="#hizmetler"><span className="service-shortcut-index">02</span><span className="service-shortcut-copy"><strong>E-posta ve bulut</strong><small>Microsoft 365 · Workspace</small></span><Arrow diagonal /></a>
+          <a className="service-shortcut" href="#hizmetler"><span className="service-shortcut-index">03</span><span className="service-shortcut-copy"><strong>Web ve sosyal medya</strong><small>Web tasarımı · SEO · içerik</small></span><Arrow diagonal /></a>
+          <a className="service-shortcut" href="#hizmetler"><span className="service-shortcut-index">04</span><span className="service-shortcut-copy"><strong>Güvenlik danışmanlığı</strong><small>İhtiyaca uygun güvenli kurulum</small></span><Arrow diagonal /></a>
+        </nav>
+      </section>
 
       <section className="audience-section section-shell" id="cozumler">
         <div className="section-heading">
