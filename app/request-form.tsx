@@ -17,6 +17,7 @@ type RequestDetails = {
 
 export default function RequestForm() {
   const [status, setStatus] = useState("");
+  const [draftHref, setDraftHref] = useState("");
   const [audience, setAudience] = useState<"Bireysel" | "Kurumsal">("Bireysel");
   const [service, setService] = useState("");
   const [messageLength, setMessageLength] = useState(0);
@@ -42,11 +43,12 @@ export default function RequestForm() {
     };
 
     const href = createEmailDraftHref(process.env.NEXT_PUBLIC_CONTACT_EMAIL, request);
+    setDraftHref(href);
     window.location.href = href;
     setStatus(
       process.env.NEXT_PUBLIC_CONTACT_EMAIL
-        ? "E-posta taslağı açıldı. Bilgileri kontrol edip e-postayı siz gönderebilirsiniz."
-        : "Taslak açıldı. Dolu Bilişim e-posta adresi henüz tanımlı olmadığından Alıcı alanını doldurmanız gerekiyor.",
+        ? "E-posta taslağı açılmaya çalışılıyor. E-postayı kontrol edip göndermek size kalır."
+        : "Dolu Bilişim e-posta adresi henüz tanımlı değil; taslağın alıcı alanını siz doldurun.",
     );
   }
 
@@ -82,7 +84,10 @@ export default function RequestForm() {
         <div className="form-submit-wrap"><button className="button button-primary form-submit" type="submit">E-posta taslağı oluştur <span aria-hidden="true">↗</span></button></div>
       </div>
       <p className="form-privacy">E-postanız otomatik gönderilmez. Açılan taslağı inceleyip gönderme işlemini siz yaparsınız.</p>
-      <p className="form-status" role="status" aria-live="polite">{status}</p>
+      <p className="form-status" role="status" aria-live="polite">
+        {status}
+        {draftHref && <><br /><a className="form-draft-retry" href={draftHref}>E-posta taslağını yeniden aç <span aria-hidden="true">↗</span></a></>}
+      </p>
     </form>
   );
 }

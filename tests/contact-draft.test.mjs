@@ -1,6 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createEmailDraftHref } from "../lib/contact-draft.mjs";
+import { readFile } from "node:fs/promises";
+
+const requestForm = await readFile(new URL("../app/request-form.tsx", import.meta.url), "utf8");
 
 const request = {
   audience: "Bireysel",
@@ -30,4 +33,11 @@ test("encodes visitor-provided content into the body, not mail headers", () => {
   const draft = createEmailDraftHref("destek@example.com", { ...request, name: "Test\nBcc: bad@example.com" });
   assert.ok(draft.includes("%0A"));
   assert.equal(draft.includes("&Bcc="), false);
+});
+
+test("request form keeps a retry link for browsers without a working mail handler", () => {
+  assert.match(requestForm, /const \[draftHref, setDraftHref\] = useState\(""\)/);
+  assert.match(requestForm, /setDraftHref\(href\)/);
+  assert.match(requestForm, /href=\{draftHref\}[\s\S]*?E-posta taslağını yeniden aç/);
+  assert.match(requestForm, /role="status" aria-live="polite"/);
 });
