@@ -23,10 +23,11 @@ test("service catalogue covers consumer, business, cloud and security needs", ()
 });
 
 test("homepage reading text uses more comfortable type sizes", () => {
-  assert.match(styles, /\.service-card p\{font-size:12px/);
-  assert.match(styles, /\.audience-card p\{[^}]*font-size:12px/);
-  assert.match(styles, /\.faq-item>p\{[^}]*font-size:14px/);
-  assert.match(styles, /\.form-grid label\{[^}]*font-size:11px/);
+  assert.match(styles, /\.main-nav\{[^}]*font-size:14px/);
+  assert.match(styles, /\.service-card p\{[^}]*font-size:14px;line-height:1\.7/);
+  assert.match(styles, /\.audience-card p\{[^}]*font-size:15px/);
+  assert.match(styles, /\.faq-item>p\{[^}]*font-size:15px/);
+  assert.match(styles, /\.form-grid label\{[^}]*font-size:13px/);
 });
 
 test("email setup serves both audiences and social media support is explicit", () => {

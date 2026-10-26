@@ -87,3 +87,88 @@ a:focus-visible,button:focus-visible{outline:3px solid #83a0ff;outline-offset:4p
   .form-privacy{font-size:12px!important;line-height:1.65}
   .form-submit{font-size:13px}
 }
+
+/* Readability pass: keep real content comfortable at normal browser zoom. */
+.announcement{font-size:12px}
+.main-nav{font-size:14px}
+.header-cta{font-size:14px}
+.eyebrow{font-size:11px}
+.hero-lede{font-size:18px;line-height:1.75}
+.hero-actions .button,.hero-actions .text-link{font-size:14px}
+.hero-proof{font-size:13px}
+.hero-proof strong{font-size:14px}
+.card-welcome{font-size:18px}
+.solution-row strong{font-size:14px}
+.solution-row div:nth-child(2) span{font-size:12px}
+.card-foot{font-size:11px}
+.trust-strip{font-size:12px}
+.section-heading>p{font-size:16px;line-height:1.75}
+.audience-kicker{font-size:10px}
+.audience-card p{font-size:15px;line-height:1.75}
+.audience-link{font-size:13px}
+.service-filter-title{font-size:14px}
+.service-audience-filters button,.service-category-filters button{font-size:14px}
+.service-result-count{font-size:14px}
+.service-category-tag{font-size:13px}
+.service-number,.service-audience{font-size:11px}
+.service-card{min-height:228px}
+.service-card h3{font-size:20px}
+.service-card p{font-size:14px;line-height:1.7}
+.approach-copy>p{font-size:15px;line-height:1.75}
+.approach-points strong{font-size:14px}
+.approach-points p{font-size:13px;line-height:1.7}
+.contact-banner p{font-size:15px;line-height:1.7}
+.contact-response strong{font-size:14px}
+.contact-response small,.contact-hours{font-size:13px}
+.form-step{font-size:10px}
+.form-intro p{font-size:13px}
+.form-grid label{font-size:13px}
+.form-grid input,.form-grid select,.form-grid textarea{font-size:16px}
+.form-submit{font-size:14px}
+.form-privacy{font-size:12px!important;line-height:1.65}
+.form-status{font-size:12px!important}
+.guide-card>p{font-size:15px;line-height:1.75}
+.guide-card-link{font-size:14px}
+.guide-search-label,.guide-category-filters button{font-size:14px}
+.guide-search-input{font-size:16px}
+.guide-search-count,.guide-search-clear{font-size:13px}
+.faq-item summary{font-size:16px}
+.faq-item>p{font-size:15px;line-height:1.75}
+.site-footer{font-size:12px}
+.service-detail-lede{font-size:19px}
+.guide-article-body p{font-size:16px;line-height:1.8}
+
+@media(min-width:761px) and (max-width:1050px){
+  .main-nav{gap:17px;font-size:13px}
+  .header-cta{gap:8px;padding:0 10px;font-size:12px}
+}
+
+@media(max-width:760px){
+  .announcement{font-size:11px}
+  .header-cta{font-size:13px}
+  .eyebrow{font-size:10px}
+  .hero-lede{font-size:16px}
+  .hero-actions .button,.hero-actions .text-link{font-size:14px}
+  .hero-proof{font-size:12px}
+  .hero-proof strong{font-size:13px}
+  .trust-strip{font-size:11px}
+  .section-heading>p{font-size:15px}
+  .audience-card p{font-size:14px}
+  .service-card{min-height:190px}
+  .service-card h3{font-size:18px}
+  .service-card p{font-size:14px;line-height:1.65}
+  .approach-copy>p,.contact-banner p,.guide-card>p{font-size:14px}
+  .approach-points strong{font-size:14px}
+  .approach-points p{font-size:13px}
+  .contact-response small,.contact-hours{font-size:12px}
+  .form-grid label{font-size:13px}
+  .form-grid input,.form-grid select,.form-grid textarea{font-size:16px}
+  .form-privacy{font-size:12px!important}
+  .form-submit{font-size:14px}
+  .guide-search-input{font-size:16px}
+  .faq-item summary{font-size:15px}
+  .faq-item>p{font-size:14px}
+  .site-footer{font-size:11px}
+  .service-detail-lede{font-size:16px}
+  .guide-article-body p{font-size:15px}
+}
