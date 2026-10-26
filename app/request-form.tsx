@@ -92,15 +92,16 @@ export default function RequestForm() {
           <select name="preferredContact" value={preferredContact} onChange={(event) => setPreferredContact(event.currentTarget.value)}><option>E-posta</option><option>Telefon</option><option>WhatsApp</option></select>
         </label>
         <label className="form-wide">Talebiniz
-          <textarea name="message" rows={4} maxLength={1800} onChange={(event) => setMessageLength(event.currentTarget.value.length)} placeholder="Nasıl yardımcı olabiliriz? Lütfen parola gibi hassas bilgileri yazmayın." required />
-          <span className="message-counter" aria-live="polite">{messageLength}/1800 karakter</span>
+          <textarea aria-describedby="request-message-help request-message-count" name="message" rows={4} maxLength={1800} onChange={(event) => setMessageLength(event.currentTarget.value.length)} placeholder="Nasıl yardımcı olabiliriz? Lütfen parola gibi hassas bilgileri yazmayın." required />
+          <span id="request-message-help" className="optional-label">En fazla 1800 karakter. Parola veya doğrulama kodu paylaşmayın.</span>
+          <span id="request-message-count" className="message-counter" aria-live="polite">{messageLength}/1800 karakter</span>
         </label>
         <label className="urgency-field">Öncelik
           <select name="urgency" defaultValue="Normal"><option>Normal</option><option>Acil</option></select>
         </label>
-        <div className="form-submit-wrap"><button className="button button-primary form-submit" type="submit">E-posta taslağı oluştur <span aria-hidden="true">↗</span></button></div>
+        <div className="form-submit-wrap"><button className="button button-primary form-submit" type="submit" aria-describedby="request-send-help">E-posta taslağı oluştur <span aria-hidden="true">↗</span></button></div>
       </div>
-      <p className="form-privacy">E-postanız otomatik gönderilmez. Açılan taslağı inceleyip gönderme işlemini siz yaparsınız.</p>
+      <p id="request-send-help" className="form-privacy">E-postanız otomatik gönderilmez. Açılan taslağı inceleyip gönderme işlemini siz yaparsınız.</p>
       <p className="form-status" role="status" aria-live="polite">
         {status}
         {draftHref && <><br /><a className="form-draft-retry" href={draftHref}>E-posta taslağını yeniden aç <span aria-hidden="true">↗</span></a></>}
