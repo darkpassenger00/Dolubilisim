@@ -82,7 +82,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         <a className="header-cta" href="/#iletisim">Talep oluştur <span className="arrow" aria-hidden="true">↗</span></a>
       </header>
 
-      <article className="guide-article">
+      <article id="rehber-baslangici" className="guide-article" tabIndex={-1}>
         <nav aria-label="Gezinme yolu" className="breadcrumbs">
           <ol>
             <li><a href="/">Ana sayfa</a></li>
@@ -154,6 +154,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           <p>İhtiyacınızı formda anlatın; talep e-posta uygulamanızda taslak olarak açılır.</p>
           <a href="/#iletisim">Destek talebi oluştur <span aria-hidden="true">↗</span></a>
         </aside>
+        <nav aria-label="Rehber gezinme"><a className="button button-secondary" href="#rehber-baslangici">Rehberin başına dön <span aria-hidden="true">↑</span></a></nav>
       </article>
       <SupportLinks />
 
