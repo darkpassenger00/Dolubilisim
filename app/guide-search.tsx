@@ -42,6 +42,9 @@ export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
         ))}
       </nav>
       <p className="guide-search-count" aria-live="polite">{results.length} rehber gösteriliyor</p>
+      {results.length > 0 && (query || selectedCategory) && (
+        <button className="guide-search-clear" type="button" onClick={() => { setQuery(""); setSelectedCategory(""); searchRef.current?.focus(); }}>Tüm filtreleri temizle</button>
+      )}
       {results.length > 0 ? (
         <div className="guide-card-grid">
           {results.map((guide) => (
