@@ -43,7 +43,7 @@ export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
           <button type="button" key={category} aria-pressed={selectedCategory === category} onClick={() => setSelectedCategory(category)}>{category}</button>
         ))}
       </nav>
-      <p className="guide-search-count" aria-live="polite">{results.length} rehber gösteriliyor</p>
+      <p className="guide-search-count" aria-live="polite">{results.length} rehber gösteriliyor{selectedCategory && <> · Kategori: {selectedCategory}</>}</p>
       {results.length > 0 && (query || selectedCategory) && (
         <button className="guide-search-clear" type="button" onClick={() => { setQuery(""); setSelectedCategory(""); searchRef.current?.focus(); }}>Tüm filtreleri temizle</button>
       )}
