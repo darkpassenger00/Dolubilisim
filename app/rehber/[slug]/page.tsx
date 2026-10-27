@@ -130,7 +130,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
             <h2 id="guide-sources-title">Resmî kaynaklar</h2>
             <ul>
               {guide.sources.map((source) => (
-                <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<span aria-hidden="true">↗</span></a></li>
+                <li key={source.url}><a href={source.url} aria-label={`${source.title} (yeni sekmede açılır)`} target="_blank" rel="noopener noreferrer">{source.title}<span aria-hidden="true">↗</span></a></li>
               ))}
             </ul>
           </aside>
