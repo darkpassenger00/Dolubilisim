@@ -73,16 +73,16 @@ export default function RequestForm() {
     <form className="request-form" onSubmit={handleSubmit} onChange={invalidateDraft}>
       <div className="form-intro"><span className="form-step">TALEP FORMU / 01</span><p>İhtiyacınızı kısaca anlatın. Bilgileriniz bu sitede kaydedilmez; e-posta taslağı cihazınızda açılır.</p></div>
       <div className="form-grid">
-        <label>Müşteri türü
+        <label>Müşteri türü <span className="optional-label">Zorunlu</span>
           <select name="audience" value={audience} onChange={handleAudienceChange} required><option>Bireysel</option><option>Kurumsal</option></select>
         </label>
-        <label>Hizmet alanı
+        <label>Hizmet alanı <span className="optional-label">Zorunlu</span>
           <select name="service" value={service} onChange={(event) => setService(event.currentTarget.value)} required><option value="" disabled>Seçim yapın</option>{serviceOptions.map((option) => <option key={option.id}>{option.title}</option>)}<option>Diğer / Emin değilim</option></select>
         </label>
-        <label>Ad soyad
+        <label>Ad soyad <span className="optional-label">Zorunlu</span>
           <input name="name" autoComplete="name" placeholder="Adınız ve soyadınız" required />
         </label>
-        <label>E-posta adresi
+        <label>E-posta adresi <span className="optional-label">Zorunlu</span>
           <input name="email" type="email" autoComplete="email" placeholder="ornek@email.com" required />
         </label>
         <label>Telefon <span className="optional-label">{phoneRequired ? "Seçtiğiniz iletişim yöntemi için gerekli" : "İsteğe bağlı"}</span>
@@ -91,7 +91,7 @@ export default function RequestForm() {
         <label>İletişim tercihi
           <select name="preferredContact" value={preferredContact} onChange={(event) => setPreferredContact(event.currentTarget.value)}><option>E-posta</option><option>Telefon</option><option>WhatsApp</option></select>
         </label>
-        <label className="form-wide">Talebiniz
+        <label className="form-wide">Talebiniz <span className="optional-label">Zorunlu</span>
           <textarea aria-describedby="request-message-help request-message-count" name="message" rows={4} maxLength={1800} onChange={(event) => setMessageLength(event.currentTarget.value.length)} placeholder="Nasıl yardımcı olabiliriz? Lütfen parola gibi hassas bilgileri yazmayın." required />
           <span id="request-message-help" className="optional-label">En fazla 1800 karakter. Parola veya doğrulama kodu paylaşmayın.</span>
           <span id="request-message-count" className="message-counter" aria-live="polite">{messageLength}/1800 karakter</span>
