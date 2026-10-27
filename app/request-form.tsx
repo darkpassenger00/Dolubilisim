@@ -93,7 +93,7 @@ export default function RequestForm() {
         </label>
         <label className="form-wide">Talebiniz <span className="optional-label">Zorunlu</span>
           <textarea aria-describedby="request-message-help request-message-count" name="message" rows={4} maxLength={1800} onChange={(event) => setMessageLength(event.currentTarget.value.length)} placeholder="Nasıl yardımcı olabiliriz? Lütfen parola gibi hassas bilgileri yazmayın." required />
-          <span id="request-message-help" className="optional-label">En fazla 1800 karakter. Parola veya doğrulama kodu paylaşmayın.</span>
+          <span id="request-message-help" className="optional-label">Kullandığınız cihazı veya uygulamayı, sorunun ne zaman başladığını ve varsa hata mesajını kısaca belirtin. Yeni bir hizmet istiyorsanız hedefinizi anlatın. En fazla 1800 karakter; parola veya doğrulama kodu paylaşmayın.</span>
           <span id="request-message-count" className="message-counter" aria-live="polite">{messageLength}/1800 karakter</span>
         </label>
         <label className="urgency-field">Öncelik
