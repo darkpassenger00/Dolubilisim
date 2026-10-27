@@ -54,7 +54,10 @@ export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
           ))}
         </div>
       ) : (
-        <p className="guide-search-empty" role="status">Bu aramayla eşleşen rehber bulunamadı. Farklı bir kelime deneyin.</p>
+        <div className="guide-search-empty">
+          <p role="status">Bu aramayla eşleşen rehber bulunamadı. Farklı bir kelime deneyin veya tüm rehberlere dönün.</p>
+          <button className="guide-search-clear" type="button" onClick={() => { setQuery(""); setSelectedCategory(""); searchRef.current?.focus(); }}>Tüm rehberleri göster</button>
+        </div>
       )}
     </div>
   );
