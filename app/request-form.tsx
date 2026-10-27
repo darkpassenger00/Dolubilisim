@@ -105,7 +105,7 @@ export default function RequestForm() {
       <p id="request-send-help" className="form-privacy">E-postanız otomatik gönderilmez. Açılan taslağı inceleyip gönderme işlemini siz yaparsınız. Ekran görüntüsü veya hata dosyası eklemek isterseniz, açılan e-posta uygulamasında ekleyebilirsiniz. Göndermeden önce eklerdeki parola ve doğrulama kodlarını gizleyin.</p>
       <p className="form-status" role="status" aria-live="polite">
         {status}
-        {draftHref && <><br /><a className="form-draft-retry" href={draftHref}>E-posta taslağını yeniden aç <span aria-hidden="true">↗</span></a></>}
+        {draftHref && <><br /><a className="form-draft-retry" href={draftHref}>E-posta taslağını yeniden aç <span aria-hidden="true">↗</span></a><br /><span>Taslak açılmadıysa cihazınızda bir e-posta uygulaması ve hesabı tanımlı olduğunu kontrol edip yeniden deneyin.</span></>}
       </p>
     </form>
   );
