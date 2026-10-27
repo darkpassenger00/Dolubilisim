@@ -32,9 +32,11 @@ export default function GuideSearch({ guides }: { guides: readonly Guide[] }) {
           onChange={(event) => setQuery(event.currentTarget.value)}
           placeholder="Ör. Microsoft 365, yedekleme…"
           autoComplete="off"
+          aria-describedby="guide-search-help"
         />
         {query && <button className="guide-search-clear" type="button" onClick={() => { setQuery(""); searchRef.current?.focus(); }}>Aramayı temizle</button>}
       </div>
+      <p id="guide-search-help" className="guide-search-count">Bir konu veya hizmet adı yazın. Seçtiğiniz kategori arama sonuçlarını daraltır.</p>
       <nav className="guide-category-filters" aria-label="Rehber kategorileri">
         <button type="button" aria-pressed={selectedCategory === ""} onClick={() => setSelectedCategory("")}>Tümü</button>
         {categories.map((category) => (
