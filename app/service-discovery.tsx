@@ -74,7 +74,8 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
       {results.length === 0 && (
         <div className="service-empty-state" role="status">
           <strong>Hizmet bulunamadı</strong>
-          <p>Aramanı veya seçili filtreleri değiştirip yeniden deneyebilirsin.</p>
+          <p>Aramanı veya seçili filtreleri değiştirip yeniden deneyebilirsin. Hangi hizmeti seçeceğinden emin değilsen ihtiyacını destek formunda anlatabilirsin.</p>
+          <a className="button button-primary" href="#iletisim">Destek talebi aç <span aria-hidden="true">↗</span></a>
           <button type="button" onClick={() => { setQuery(""); setAudience("all"); setSelectedCategory("all"); searchRef.current?.focus(); }}>Aramayı ve filtreleri temizle</button>
         </div>
       )}
