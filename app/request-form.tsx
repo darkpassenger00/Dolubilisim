@@ -83,7 +83,7 @@ export default function RequestForm() {
           <input name="name" autoComplete="name" placeholder="Adınız ve soyadınız" required />
         </label>
         <label>E-posta adresi <span className="optional-label">Zorunlu</span>
-          <input name="email" type="email" autoComplete="email" placeholder="ornek@email.com" required />
+          <input name="email" type="email" autoComplete="email" autoCapitalize="none" autoCorrect="off" spellCheck={false} placeholder="ornek@email.com" required />
         </label>
         <label>Telefon <span className="optional-label">{phoneRequired ? "Seçtiğiniz iletişim yöntemi için gerekli" : "İsteğe bağlı"}</span>
           <input name="phone" type="tel" autoComplete="tel" placeholder="05__ ___ __ __" required={phoneRequired} />
