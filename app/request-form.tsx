@@ -17,6 +17,7 @@ type RequestDetails = {
 };
 
 export default function RequestForm() {
+  const [isReady, setIsReady] = useState(false);
   const [status, setStatus] = useState("");
   const [draftHref, setDraftHref] = useState("");
   const [audience, setAudience] = useState<"Bireysel" | "Kurumsal">("Bireysel");
@@ -27,6 +28,7 @@ export default function RequestForm() {
   const serviceOptions = getServicesForAudience(audience === "Bireysel" ? "individual" : "business");
 
   useEffect(() => {
+    setIsReady(true);
     const prefill = getServiceRequestPrefill(new URLSearchParams(window.location.search).get("hizmet"), services);
     if (prefill) {
       setAudience(prefill.audience as "Bireysel" | "Kurumsal");
@@ -72,7 +74,8 @@ export default function RequestForm() {
   return (
     <form className="request-form" onSubmit={handleSubmit} onChange={invalidateDraft}>
       <div className="form-intro"><span className="form-step">TALEP FORMU / 01</span><p>İhtiyacınızı kısaca anlatın. Bilgileriniz bu sitede kaydedilmez; e-posta taslağı cihazınızda açılır.</p></div>
-      <div className="form-grid">
+      <noscript><p className="form-privacy">E-posta taslağı oluşturmak için tarayıcınızda JavaScript’i etkinleştirin. Bu form JavaScript kapalıyken bilgi göndermez.</p></noscript>
+      <fieldset className="form-grid" disabled={!isReady} aria-label="Destek talebi bilgileri" style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
         <label>Müşteri türü <span className="optional-label">Zorunlu</span>
           <select name="audience" value={audience} onChange={handleAudienceChange} required><option>Bireysel</option><option>Kurumsal</option></select>
         </label>
@@ -101,7 +104,7 @@ export default function RequestForm() {
           <span id="request-urgency-help" className="optional-label">İşinizi durduran bir sorun varsa Acil seçin ve etkisini talebinizde belirtin. İlk yanıt süresi, sorunun çözüm süresi değildir.</span>
         </label>
         <div className="form-submit-wrap"><button className="button button-primary form-submit" type="submit" aria-describedby="request-send-help">E-posta taslağı oluştur <span aria-hidden="true">↗</span></button></div>
-      </div>
+      </fieldset>
       <p id="request-send-help" className="form-privacy">E-postanız otomatik gönderilmez. Açılan taslağı inceleyip gönderme işlemini siz yaparsınız. Ekran görüntüsü veya hata dosyası eklemek isterseniz, açılan e-posta uygulamasında ekleyebilirsiniz. Göndermeden önce eklerdeki parola ve doğrulama kodlarını gizleyin.</p>
       <p className="form-status" role="status" aria-live="polite">
         {status}
