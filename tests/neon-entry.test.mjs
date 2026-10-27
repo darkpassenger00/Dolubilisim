@@ -10,7 +10,7 @@ test("page entry glow is decorative and cannot block interaction", () => {
   assert.match(styles, /\.neon-entry-glow\s*\{[^}]*position:\s*fixed;[^}]*pointer-events:\s*none;/s);
 });
 
-test("neon perimeter sweeps once and respects reduced-motion settings", () => {
-  assert.match(styles, /\.neon-entry-glow::before\s*\{[^}]*animation:\s*neon-entry-spin\s+2s[^;]*forwards/s);
+test("neon perimeter cycles slowly and respects reduced-motion settings", () => {
+  assert.match(styles, /\.neon-entry-glow::before\s*\{[^}]*animation:\s*neon-entry-spin\s+12s[^;]*infinite/s);
   assert.match(styles, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.neon-entry-glow::before\s*\{[^}]*animation:\s*none/s);
 });
