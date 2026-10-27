@@ -97,7 +97,8 @@ export default function RequestForm() {
           <span id="request-message-count" className="message-counter" aria-live="polite">{messageLength}/1800 karakter</span>
         </label>
         <label className="urgency-field">Öncelik
-          <select name="urgency" defaultValue="Normal"><option>Normal</option><option>Acil</option></select>
+          <select name="urgency" defaultValue="Normal" aria-describedby="request-urgency-help"><option>Normal</option><option>Acil</option></select>
+          <span id="request-urgency-help" className="optional-label">İşinizi durduran bir sorun varsa Acil seçin ve etkisini talebinizde belirtin. İlk yanıt süresi, sorunun çözüm süresi değildir.</span>
         </label>
         <div className="form-submit-wrap"><button className="button button-primary form-submit" type="submit" aria-describedby="request-send-help">E-posta taslağı oluştur <span aria-hidden="true">↗</span></button></div>
       </div>
