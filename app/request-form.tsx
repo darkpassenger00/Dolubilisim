@@ -48,12 +48,21 @@ export default function RequestForm() {
       audience: String(values.get("audience") || ""),
       service: String(values.get("service") || ""),
       urgency: String(values.get("urgency") || ""),
-      name: String(values.get("name") || ""),
-      email: String(values.get("email") || ""),
-      phone: String(values.get("phone") || ""),
+      name: String(values.get("name") || "").trim(),
+      email: String(values.get("email") || "").trim(),
+      phone: String(values.get("phone") || "").trim(),
       preferredContact: String(values.get("preferredContact") || ""),
-      message: String(values.get("message") || ""),
+      message: String(values.get("message") || "").trim(),
     };
+
+    const emptyField = !request.name ? "name" : !request.message ? "message" : phoneRequired && !request.phone ? "phone" : null;
+    if (emptyField) {
+      setDraftHref("");
+      setStatus("Lütfen ad soyad, talep açıklaması ve gerekiyorsa telefon alanını doldurun. Yalnızca boşluk kullanılamaz.");
+      const control = event.currentTarget.elements.namedItem(emptyField);
+      if (control instanceof HTMLElement) control.focus();
+      return;
+    }
 
     const href = createEmailDraftHref(process.env.NEXT_PUBLIC_CONTACT_EMAIL, request);
     setDraftHref(href);
