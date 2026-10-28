@@ -250,3 +250,9 @@ a:focus-visible,button:focus-visible{outline:3px solid #83a0ff;outline-offset:4p
 .guide-article{overflow-wrap:anywhere}
 .guide-article-meta{flex-wrap:wrap}
 .guide-article .breadcrumbs li{min-width:0}
+
+/* Readable guide navigation with comfortable touch targets. */
+.guide-toc>strong,.guide-sources h2{font-size:18px}
+.guide-toc li,.guide-sources a{font-size:16px;line-height:1.6}
+.guide-toc a{display:flex;align-items:center;min-height:44px;padding:6px 0}
+.guide-sources a{min-height:44px;padding:6px 0}
