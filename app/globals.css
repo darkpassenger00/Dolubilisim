@@ -245,3 +245,8 @@ a:focus-visible,button:focus-visible{outline:3px solid #83a0ff;outline-offset:4p
 .support-links-hero .support-link-value{font-size:14px}
 .support-links-hero .support-link-detail{font-size:12px}
 @media(max-width:760px){.support-links-hero{gap:8px}.support-links-hero .support-link{flex:1 1 140px;padding:12px}}
+
+/* Keep long guide titles and source links within narrow screens. */
+.guide-article{overflow-wrap:anywhere}
+.guide-article-meta{flex-wrap:wrap}
+.guide-article .breadcrumbs li{min-width:0}
