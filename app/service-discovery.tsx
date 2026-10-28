@@ -59,7 +59,7 @@ export default function ServiceDiscovery({ services }: { services: readonly Serv
             <button type="button" onClick={() => { setQuery(""); setAudience("all"); setSelectedCategory("all"); searchRef.current?.focus(); }}>Aramayı ve filtreleri temizle</button>
           </div>
         )}
-        <p className="service-result-count" aria-live="polite">{results.length} hizmet gösteriliyor</p>
+        <p className="service-result-count" aria-live="polite">{results.length} hizmet gösteriliyor{audience !== "all" && ` · ${audienceLabel(audience)}`}{selectedCategory !== "all" && ` · ${selectedCategory}`}{query.trim() && ` · “${query.trim()}” araması`}</p>
       </div>
       <div className="service-grid">
         {results.map((service, index) => (
